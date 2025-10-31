@@ -1,7 +1,7 @@
 ---
 title: "Installing Software"
-teaching: 0
-exercises: 0
+teaching: 45
+exercises: 45
 questions:
 - "How do you install software?"
 objectives:

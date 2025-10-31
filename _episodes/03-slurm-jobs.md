@@ -1,7 +1,7 @@
 ---
 title: "SLURM Jobs"
-teaching: 0
-exercises: 0
+teaching: 45
+exercises: 45
 questions:
 - "How do we submit slurm jobs?"
 objectives:
