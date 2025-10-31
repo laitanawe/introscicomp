@@ -1281,6 +1281,9 @@ it would mean that:
 
 ### Loops
 
+- A shell script is just a list of bash commands in a text file.
+- To make a shell script file executable, run `chmod +x script.sh`.
+
 **Loops** are a programming construct which allow us to repeat a command or set of commands
 for each item in a list.
 As such they are key to productivity improvements through automation.
