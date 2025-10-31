@@ -106,6 +106,235 @@ Documents   Library     Music       Public
 ~~~
 {: .output}
 
+~~~
+$ pwd
+~~~
+{: .language-bash}
+
+~~~
+$ ls -F
+~~~
+{: .language-bash}
+
+
+
+### Getting help
+
+`ls` has lots of other **options**. There are two common ways to find out how
+to use a command and what options it accepts ---
+**depending on your environment, you might find that only one of these ways works:**
+
+1. We can pass a `--help` option to the command (not available on macOS), such as:
+    ~~~
+    $ ls --help
+    ~~~
+    {: .language-bash}
+
+2. We can read its manual with `man` (not available in Git Bash), such as:
+    ~~~
+    $ man ls
+    ~~~
+    {: .language-bash}
+
+We'll describe both ways next.
+
+#### The `--help` option
+
+Most bash commands and programs that people have written to be
+run from within bash, support a `--help` option that displays more
+information on how to use the command or program.
+
+~~~
+$ ls --help
+~~~
+{: .language-bash}
+
+~~~
+Usage: ls [OPTION]... [FILE]...
+List information about the FILEs (the current directory by default).
+Sort entries alphabetically if neither -cftuvSUX nor --sort is specified.
+
+Mandatory arguments to long options are mandatory for short options, too.
+  -a, --all                  do not ignore entries starting with .
+  -A, --almost-all           do not list implied . and ..
+      --author               with -l, print the author of each file
+  -b, --escape               print C-style escapes for nongraphic characters
+      --block-size=SIZE      scale sizes by SIZE before printing them; e.g.,
+                               '--block-size=M' prints sizes in units of
+                               1,048,576 bytes; see SIZE format below
+  -B, --ignore-backups       do not list implied entries ending with ~
+  -c                         with -lt: sort by, and show, ctime (time of last
+                               modification of file status information);
+                               with -l: show ctime and sort by name;
+                               otherwise: sort by ctime, newest first
+  -C                         list entries by columns
+      --color[=WHEN]         colorize the output; WHEN can be 'always' (default
+                               if omitted), 'auto', or 'never'; more info below
+  -d, --directory            list directories themselves, not their contents
+  -D, --dired                generate output designed for Emacs' dired mode
+  -f                         do not sort, enable -aU, disable -ls --color
+  -F, --classify             append indicator (one of */=>@|) to entries
+...        ...        ...
+~~~
+{: .output}
+
+
+#### The `man` command
+
+The other way to learn about `ls` is to type
+~~~
+$ man ls
+~~~
+{: .language-bash}
+
+This command will turn your terminal into a page with a description
+of the `ls` command and its options.
+
+To navigate through the `man` pages,
+you may use <kbd>↑</kbd> and <kbd>↓</kbd> to move line-by-line,
+or try <kbd>B</kbd> and <kbd>Spacebar</kbd> to skip up and down by a full page.
+To search for a character or word in the `man` pages,
+use <kbd>/</kbd> followed by the character or word you are searching for.
+Sometimes a search will result in multiple hits.
+If so, you can move between hits using <kbd>N</kbd> (for moving forward) and
+<kbd>Shift</kbd>+<kbd>N</kbd> (for moving backward).
+
+To **quit** the `man` pages, press <kbd>Q</kbd>.
+
+~~~
+-bash: cd: shell-lesson-data: No such file or directory
+~~~
+{: .error}
+
+But we get an error! Why is this?
+
+With our methods so far,
+`cd` can only see sub-directories inside your current directory. There are
+different ways to see directories above your current location; we'll start
+with the simplest.
+
+There is a shortcut in the shell to move up one directory level
+that looks like this:
+
+~~~
+$ cd ..
+~~~
+{: .language-bash}
+
+`..` is a special directory name meaning
+"the directory containing this one",
+or more succinctly,
+the **parent** of the current directory.
+Sure enough,
+if we run `pwd` after running `cd ..`, we're back in `/Users/nelle/Desktop/shell-lesson-data`:
+
+~~~
+$ pwd
+~~~
+{: .language-bash}
+
+~~~
+/Users/nelle/Desktop/shell-lesson-data
+~~~
+{: .output}
+
+The special directory `..` doesn't usually show up when we run `ls`. If we want
+to display it, we can add the `-a` option to `ls -F`:
+
+~~~
+$ ls -F -a
+~~~
+{: .language-bash}
+
+~~~
+./  ../  exercise-data/  north-pacific-gyre/
+~~~
+{: .output}
+
+`-a` stands for 'show all';
+it forces `ls` to show us file and directory names that begin with `.`,
+such as `..` (which, if we're in `/Users/nelle`, refers to the `/Users` directory).
+As you can see,
+it also displays another special directory that's just called `.`,
+which means 'the current working directory'.
+It may seem redundant to have a name for it,
+but we'll see some uses for it soon.
+
+Note that in most command line tools, multiple options can be combined
+with a single `-` and no spaces between the options: `ls -F -a` is
+equivalent to `ls -Fa`.
+
+> ## Other Hidden Files
+>
+> In addition to the hidden directories `..` and `.`, you may also see a file
+> called `.bash_profile`. This file usually contains shell configuration
+> settings. You may also see other files and directories beginning
+> with `.`. These are usually files and directories that are used to configure
+> different programs on your computer. The prefix `.` is used to prevent these
+> configuration files from cluttering the terminal when a standard `ls` command
+> is used.
+{: .callout}
+
+These three commands are the basic commands for navigating the filesystem on your computer:
+`pwd`, `ls`, and `cd`. Let's explore some variations on those commands. What happens
+if you type `cd` on its own, without giving
+a directory?
+
+~~~
+$ cd
+~~~
+{: .language-bash}
+
+How can you check what happened? `pwd` gives us the answer!
+
+~~~
+$ pwd
+~~~
+{: .language-bash}
+
+~~~
+/Users/nelle
+~~~
+{: .output}
+
+It turns out that `cd` without an argument will return you to your home directory,
+which is great if you've got lost in your own filesystem.
+
+Let's try returning to the `exercise-data` directory from before. Last time, we used
+three commands, but we can actually string together the list of directories
+to move to `exercise-data` in one step:
+
+~~~
+$ cd Desktop/shell-lesson-data/exercise-data
+~~~
+{: .language-bash}
+
+Check that we've moved to the right place by running `pwd` and `ls -F`.
+
+If we want to move up one level from the data directory, we could use `cd ..`.  But
+there is another way to move to any directory, regardless of your
+current location.
+
+So far, when specifying directory names, or even a directory path (as above),
+we have been using **relative paths**.  When you use a relative path with a command
+like `ls` or `cd`, it tries to find that location from where we are,
+rather than from the root of the file system.
+
+However, it is possible to specify the **absolute path** to a directory by
+including its entire path from the root directory, which is indicated by a
+leading slash. The leading `/` tells the computer to follow the path from
+the root of the file system, so it always refers to exactly one directory,
+no matter where we are when we run the command.
+
+This allows us to move to our `shell-lesson-data` directory from anywhere on
+the filesystem (including from inside `exercise-data`). To find the absolute path
+we're looking for, we can use `pwd` and then extract the piece we need
+to move to `shell-lesson-data`.
+
+~~~
+$ pwd
+~~~
+{: .language-bash}
 > ## Command not found
 > If the shell can't find a program whose name is the command you typed, it
 > will print an error message such as:
