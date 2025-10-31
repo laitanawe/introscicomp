@@ -1370,4 +1370,138 @@ The **loop body**
 then executes two commands for each of those files.
 The first command, `echo`, prints its command-line arguments to standard output.
 
+
+## Writing a Script
+
+So how do we write a shell script, exactly? It turns out we can do this with a
+text editor. Start editing a file called "demo.sh" (to recap, we can do this
+with `nano demo.sh`). The ".sh" is the standard file extension for shell
+scripts that most people use (you may also see ".bash" used).
+
+Our shell script will have two parts:
+
+* On the very first line, add `#!/bin/bash`. The `#!` (pronounced "hash-bang")
+  tells our computer what program to run our script with. In this case, we are
+  telling it to run our script with our command-line shell (what we've been
+  doing everything in so far). If we wanted our script to be run with something
+  else, like Perl, we could add `#!/usr/bin/perl`. If we want our script to work on any unix platform and find the path to the bash program, then the first line should be `#!/usr/bin/env bash`
+* Now, anywhere below the first line, add `echo "Our script worked!"`. When our
+  script runs, `echo` will happily print out `Our script worked!`.
+
+Our file should now look like this:
+
+```
+#!/usr/bin/env bash
+
+echo "Our script worked!"
+```
+{: .language-bash}
+
+Ready to run our program?
+Let's try running it:
+
+```
+$ demo.sh
+```
+{: .language-bash}
+
+```
+bash: demo.sh: command not found...
+```
+{: .error}
+
+Strangely enough, Bash can't find our script. As it turns out, Bash will only
+look in certain directories for scripts to run. To run anything else, we need
+to tell Bash exactly where to look. To run a script that we wrote ourselves, we
+need to specify the full path to the file, followed by the filename. We could
+do this one of two ways: either with our absolute path `{{
+site.workshop_host_homedir }}/yourUserName/demo.sh`, or with the relative path
+`./demo.sh`.
+
+```
+$ ./demo.sh
+```
+{: .language-bash}
+
+```
+bash: ./demo.sh: Permission denied
+```
+{: .error}
+
+There's one last thing we need to do. Before a file can be run, it needs
+"permission" to run. Let's look at our file's permissions with `ls -l`:
+
+```
+$ ls -l
+```
+{: .language-bash}
+
+```
+-rw-rw-r-- 1 yourUsername tc001 12534006 Jan 16 18:50 bash-lesson.tar.gz
+-rw-rw-r-- 1 yourUsername tc001       40 Jan 16 19:41 demo.sh
+-rw-rw-r-- 1 yourUsername tc001 77426528 Jan 16 18:50 dmel-all-r6.19.gtf
+-rw-r--r-- 1 yourUsername tc001   721242 Jan 25  2016 dmel_unique_protein_is...
+drwxrwxr-x 2 yourUsername tc001     4096 Jan 16 19:16 fastq
+-rw-r--r-- 1 yourUsername tc001  1830516 Jan 25  2016 gene_association.fb.gz
+-rw-rw-r-- 1 yourUsername tc001       15 Jan 16 19:17 test.txt
+-rw-rw-r-- 1 yourUsername tc001      245 Jan 16 19:24 word_counts.txt
+```
+{: .output}
+
+So how do we change permissions? As I mentioned earlier, we need permission to
+execute our script. Changing permissions is done with `chmod`. To add
+executable permissions for all users we could use this:
+
+```
+$ chmod +x demo.sh
+$ ls -l
+```
+{: .language-bash}
+
+```
+-rw-rw-r-- 1 yourUsername tc001 12534006 Jan 16 18:50 bash-lesson.tar.gz
+-rwxrwxr-x 1 yourUsername tc001       40 Jan 16 19:41 demo.sh
+-rw-rw-r-- 1 yourUsername tc001 77426528 Jan 16 18:50 dmel-all-r6.19.gtf
+-rw-r--r-- 1 yourUsername tc001   721242 Jan 25  2016 dmel_unique_protein_is...
+drwxrwxr-x 2 yourUsername tc001     4096 Jan 16 19:16 fastq
+-rw-r--r-- 1 yourUsername tc001  1830516 Jan 25  2016 gene_association.fb.gz
+-rw-rw-r-- 1 yourUsername tc001       15 Jan 16 19:17 test.txt
+-rw-rw-r-- 1 yourUsername tc001      245 Jan 16 19:24 word_counts.txt
+```
+{: .output}
+
+Now that we have executable permissions for that file, we can run it.
+
+```
+$ ./demo.sh
+```
+{: .language-bash}
+
+```
+Our script worked!
+```
+{: .output}
+
+Fantastic, we've written our first program! Before we go any further, let's
+learn how to take notes inside our program using comments. A comment is
+indicated by the `#` character, followed by whatever we want. Comments do not
+get run. Let's try out some comments in the console, then add one to our
+script!
+
+```
+# This won't show anything.
+```
+{: .output}
+
+Now lets try adding this to our script with `nano`. Edit your script to look
+something like this:
+
+```
+#!/usr/bin/env bash
+
+# This is a comment... they are nice for making notes!
+echo "Our script worked!"
+```
+{: .language-bash}
+
 {% include links.md %}
