@@ -1,15 +1,20 @@
 ---
-title: "Introduction"
+title: "SLURM Jobs"
 teaching: 0
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "How do we submit slurm jobs?"
 objectives:
-- "First learning objective. (FIXME)"
+- "Batch Jobs"
+- "Interactive Jobs"
+- "Mandatory Directives"
+- "Resource Directives"
+- "Recommended Service Units"
+- "SLURM Batch Scripts"
+- "Tasks"
 keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
-FIXME
+
 
 {% include links.md %}
-

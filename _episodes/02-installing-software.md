@@ -1,15 +1,16 @@
 ---
-title: "Introduction"
+title: "Installing Software"
 teaching: 0
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "How do you install software?"
 objectives:
-- "First learning objective. (FIXME)"
+- "Directly installing software"
+- "Precompiled binaries"
+- "Installing from the source"
 keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
-FIXME
+
 
 {% include links.md %}
-
