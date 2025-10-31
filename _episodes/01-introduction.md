@@ -1238,6 +1238,46 @@ $ wc -l *.txt && echo "word count completed!"
 {: .language-bash}
 
 
+### Permissions in Unix
+
+- "Correct permissions are critical for the security of a system."
+- "File permissions describe who and what can read, write, modify, and access a file."
+- "Use `ls -l` to view the permissions for a specific file."
+- "Use `chmod` to change permissions on a file or directory."
+
+Now let's look at files and directories.
+Every file and directory on a Unix computer belongs to one owner and one group.
+Along with each file's content,
+the operating system stores the numeric IDs of the user and group that own it.
+
+The user-and-group model means that
+for each file
+every user on the system falls into one of three categories:
+the owner of the file,
+someone in the file's group,
+and everyone else.
+
+For each of these three categories,
+the computer keeps track of
+whether people in that category can read the file,
+write to the file,
+or execute the file
+(i.e., run it if it is a program).
+
+For example, if a file had the following set of permissions:
+
+<table class="table table-striped">
+<tr><td></td><th>user</th><th>group</th><th>all</th></tr>
+<tr><th>read</th><td>yes</td><td>yes</td><td>no</td></tr>
+<tr><th>write</th><td>yes</td><td>no</td><td>no</td></tr>
+<tr><th>execute</th><td>no</td><td>no</td><td>no</td></tr>
+</table>
+
+it would mean that:
+
+*   the file's owner can read and write it, but not run it;
+*   other people in the file's group can read it, but not modify it or run it; and
+*   everybody else can do nothing with it at all.
 
 
 {% include links.md %}
