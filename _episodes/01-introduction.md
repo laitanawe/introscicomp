@@ -1,7 +1,7 @@
 ---
 title: "Introducing the Shell"
-teaching: 5
-exercises: 0
+teaching: 60
+exercises: 30
 questions:
 - "What is a command shell and why would I use one?"
 objectives:
@@ -1014,6 +1014,230 @@ or specifying a naming pattern using wildcards.
 > > as the 'data' directory.
 > {: .solution}
 {: .challenge}
+
+## Combining multiple commands
+Nothing prevents us from chaining pipes consecutively.
+We can for example send the output of `wc` directly to `sort`,
+and then the resulting output to `head`.
+This removes the need for any intermediate files.
+
+We'll start by using a pipe to send the output of `wc` to `sort`:
+
+~~~
+$ wc -l *.pdb | sort -n
+~~~
+{: .language-bash}
+
+~~~
+   9 methane.pdb
+  12 ethane.pdb
+  15 propane.pdb
+  20 cubane.pdb
+  21 pentane.pdb
+  30 octane.pdb
+ 107 total
+~~~
+{: .output}
+
+We can then send that output through another pipe, to `head`, so that the full pipeline becomes:
+
+~~~
+$ wc -l *.pdb | sort -n | head -n 1
+~~~
+{: .language-bash}
+
+~~~
+   9  methane.pdb
+~~~
+{: .output}
+
+This is exactly like a mathematician nesting functions like *log(3x)*
+and saying 'the log of three times *x*'.
+In our case,
+the calculation is 'head of sort of line count of `*.pdb`'.
+
+
+The redirection and pipes used in the last few commands are illustrated below:
+
+![Redirects and Pipes of different commands: "wc -l *.pdb" will direct the
+output to the shell. "wc -l *.pdb > lengths" will direct output to the file
+"lengths". "wc -l *.pdb | sort -n | head -n 1" will build a pipeline where the
+output of the "wc" command is the input to the "sort" command, the output of
+the "sort" command is the input to the "head" command and the output of the
+"head" command is directed to the shell](../fig/redirects-and-pipes.svg)
+
+> ## Piping Commands Together
+>
+> In our current directory, we want to find the 3 files which have the least number of
+> lines. Which command listed below would work?
+>
+> 1. `wc -l * > sort -n > head -n 3`
+> 2. `wc -l * | sort -n | head -n 1-3`
+> 3. `wc -l * | head -n 3 | sort -n`
+> 4. `wc -l * | sort -n | head -n 3`
+>
+> > ## Solution
+> > Option 4 is the solution.
+> > The pipe character `|` is used to connect the output from one command to
+> > the input of another.
+> > `>` is used to redirect standard output to a file.
+> > Try it in the `shell-lesson-data/exercise-data/proteins` directory!
+> {: .solution}
+{: .challenge}
+
+
+## Tools designed to work together
+This idea of linking programs together is why Unix has been so successful.
+Instead of creating enormous programs that try to do many different things,
+Unix programmers focus on creating lots of simple tools that each do one job well,
+and that work well with each other.
+This programming model is called 'pipes and filters'.
+We've already seen pipes;
+a **filter** is a program like `wc` or `sort`
+that transforms a stream of input into a stream of output.
+Almost all of the standard Unix tools can work this way:
+unless told to do otherwise,
+they read from standard input,
+do something with what they've read,
+and write to standard output.
+
+The key is that any program that reads lines of text from standard input
+and writes lines of text to standard output
+can be combined with every other program that behaves this way as well.
+You can *and should* write your programs this way
+so that you and other people can put those programs into pipes to multiply their power.
+
+
+> ## Pipe Reading Comprehension
+>
+> A file called `animals.csv` (in the `shell-lesson-data/exercise-data/animal-counts` folder)
+> contains the following data:
+>
+> ~~~
+> 2012-11-05,deer,5
+> 2012-11-05,rabbit,22
+> 2012-11-05,raccoon,7
+> 2012-11-06,rabbit,19
+> 2012-11-06,deer,2
+> 2012-11-06,fox,4
+> 2012-11-07,rabbit,16
+> 2012-11-07,bear,1
+> ~~~
+> {: .source}
+>
+> What text passes through each of the pipes and the final redirect in the pipeline below?
+> Note, the `sort -r` command sorts in reverse order.
+>
+> ~~~
+> $ cat animals.csv | head -n 5 | tail -n 3 | sort -r > final.txt
+> ~~~
+> {: .language-bash}
+> Hint: build the pipeline up one command at a time to test your understanding
+> > ## Solution
+> > The `head` command extracts the first 5 lines from `animals.csv`.
+> > Then, the last 3 lines are extracted from the previous 5 by using the `tail` command.
+> > With the `sort -r` command those 3 lines are sorted in reverse order and finally,
+> > the output is redirected to a file `final.txt`.
+> > The content of this file can be checked by executing `cat final.txt`.
+> > The file should contain the following lines:
+> > ```
+> > 2012-11-06,rabbit,19
+> > 2012-11-06,deer,2
+> > 2012-11-05,raccoon,7
+> > ```
+> > {: .source}
+> {: .solution}
+{: .challenge}
+
+> ## Pipe Construction
+>
+> For the file `animals.csv` from the previous exercise, consider the following command:
+>
+> ~~~
+> $ cut -d , -f 2 animals.csv
+> ~~~
+> {: .language-bash}
+>
+> The `cut` command is used to remove or 'cut out' certain sections of each line in the file,
+> and `cut` expects the lines to be separated into columns by a <kbd>Tab</kbd> character.
+> A character used in this way is a called a **delimiter**.
+> In the example above we use the `-d` option to specify the comma as our delimiter character.
+> We have also used the `-f` option to specify that we want to extract the second field (column).
+> This gives the following output:
+>
+> ~~~
+> deer
+> rabbit
+> raccoon
+> rabbit
+> deer
+> fox
+> rabbit
+> bear
+> ~~~
+> {: .output}
+>
+> The `uniq` command filters out adjacent matching lines in a file.
+> How could you extend this pipeline (using `uniq` and another command) to find
+> out what animals the file contains (without any duplicates in their
+> names)?
+>
+> > ## Solution
+> > ```
+> > $ cut -d , -f 2 animals.csv | sort | uniq
+> > ```
+> > {: .language-bash}
+> {: .solution}
+{: .challenge}
+
+> ## Which Pipe?
+>
+> The file `animals.csv` contains 8 lines of data formatted as follows:
+>
+> ~~~
+> 2012-11-05,deer,5
+> 2012-11-05,rabbit,22
+> 2012-11-05,raccoon,7
+> 2012-11-06,rabbit,19
+> ...
+> ~~~
+> {: .output}
+>
+> The `uniq` command has a `-c` option which gives a count of the
+> number of times a line occurs in its input.  Assuming your current
+> directory is `shell-lesson-data/exercise-data/animal-counts`,
+> what command would you use to produce a table that shows
+> the total count of each type of animal in the file?
+>
+> 1.  `sort animals.csv | uniq -c`
+> 2.  `sort -t, -k2,2 animals.csv | uniq -c`
+> 3.  `cut -d, -f 2 animals.csv | uniq -c`
+> 4.  `cut -d, -f 2 animals.csv | sort | uniq -c`
+> 5.  `cut -d, -f 2 animals.csv | sort | uniq -c | wc -l`
+>
+> > ## Solution
+> > Option 4. is the correct answer.
+> > If you have difficulty understanding why, try running the commands, or sub-sections of
+> > the pipelines (make sure you are in the `shell-lesson-data/exercise-data/animal-counts`
+> > directory).
+> {: .solution}
+{: .challenge}
+
+## Executing Multiple Commands in one line
+These concepts are important in bash.
+> 1.  `A; B`    # Run command A and then B, regardless of success of A
+> 2.  `A && B`  # Run command B if and only if A succeeded
+> 3.  `A || B`  # Run command B if and only if A failed
+> 4.  `A &`     # Run command A in background.
+
+For example, we can type:
+~~~
+$ cd north-pacific-gyre
+$ wc -l *.txt && echo "word count completed!"
+~~~
+{: .language-bash}
+
+
 
 
 {% include links.md %}
