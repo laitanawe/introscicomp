@@ -1279,5 +1279,95 @@ it would mean that:
 *   other people in the file's group can read it, but not modify it or run it; and
 *   everybody else can do nothing with it at all.
 
+### Loops
+
+**Loops** are a programming construct which allow us to repeat a command or set of commands
+for each item in a list.
+As such they are key to productivity improvements through automation.
+Similar to wildcards and tab completion, using loops also reduces the
+amount of typing required (and hence reduces the number of typing mistakes).
+
+- "A `for` loop repeats commands once for every thing in a list."
+- "Every `for` loop needs a variable to refer to the thing it is currently operating on."
+- "Use `$name` to expand a variable (i.e., get its value). `${name}` can also be used."
+- "Do not use spaces, quotes, or wildcard characters such as * or '?' in filenames, as it complicates variable expansion."
+- "Give files consistent names that are easy to match with wildcard patterns to make it easy to select them for looping."
+- "Use the up-arrow key to scroll up through previous commands to edit and repeat them."
+- "Use <kbd>Ctrl</kbd>+<kbd>R</kbd> to search through the previously entered commands."
+- "Use `history` to display recent commands, and `![number]` to repeat a command by number."
+
+For Loop Analogy:
+```
+for thing in list_of_things
+do
+    operation_using $thing    # Indentation within the loop is not required, but aids legibility
+done
+```
+{: .language-bash}
+
+and we can apply this to our example like this:
+
+```
+$ for filename in basilisk.dat minotaur.dat unicorn.dat
+> do
+>     head -n 2 $filename | tail -n 1
+> done
+```
+{: .language-bash}
+
+
+```
+CLASSIFICATION: basiliscus vulgaris
+CLASSIFICATION: bos hominus
+CLASSIFICATION: equus monoceros
+```
+{: .output}
+
+## Redirect and Append during loops
+
+> ## Saving to a File in a Loop
+>
+> Also in the `shell-lesson-data/exercise-data/proteins` directory,
+> what would be the output of the following loop?
+>
+> ~~~
+> for datafile in *.pdb
+> do
+>     cat $datafile >> all.pdb
+> done
+> ~~~
+> {: .language-bash}
+>
+> 1.  All of the text from `cubane.pdb`, `ethane.pdb`, `methane.pdb`, `octane.pdb`, and
+>     `pentane.pdb` would be concatenated and saved to a file called `all.pdb`.
+> 2.  The text from `ethane.pdb` will be saved to a file called `all.pdb`.
+> 3.  All of the text from `cubane.pdb`, `ethane.pdb`, `methane.pdb`, `octane.pdb`, `pentane.pdb`
+>     and `propane.pdb` would be concatenated and saved to a file called `all.pdb`.
+> 4.  All of the text from `cubane.pdb`, `ethane.pdb`, `methane.pdb`, `octane.pdb`, `pentane.pdb`
+>     and `propane.pdb` would be printed to the screen and saved to a file called `all.pdb`.
+>
+> > ## Solution
+> > 3 is the correct answer. `>>` appends to a file, rather than overwriting it with the redirected
+> > output from a command.
+> > Given the output from the `cat` command has been redirected, nothing is printed to the screen.
+> {: .solution}
+{: .challenge}
+
+Let's continue with our example in the `shell-lesson-data/exercise-data/creatures` directory.
+Here's a slightly more complicated loop:
+
+~~~
+$ for filename in *.dat
+> do
+>     echo $filename
+>     head -n 100 $filename | tail -n 20
+> done
+~~~
+{: .language-bash}
+
+The shell starts by expanding `*.dat` to create the list of files it will process.
+The **loop body**
+then executes two commands for each of those files.
+The first command, `echo`, prints its command-line arguments to standard output.
 
 {% include links.md %}
