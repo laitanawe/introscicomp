@@ -394,7 +394,7 @@ In order to achieve her task, Nelle needs to know how to:
 
 
 
-## Exercies
+## Exercises
 
 > ## Absolute vs Relative Paths
 >
