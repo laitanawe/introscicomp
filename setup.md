@@ -4,7 +4,7 @@ title: Setup
 ## Download files
 You need to download some files to follow this lesson.
 
-1. Download [shell-lesson-data.zip][zip-file] and move the file to your home directory.
+1. Download <a href="https://laitanawe.github.io/introscicomp/data/shell-lesson-data.zip">shell-lesson-data.zip</a> and move the file to your home directory.
 2. Unzip/extract `shell-lesson-data.zip`
 **Let your instructor know if you need help with this step**.
 You should end up with a new folder called **`shell-lesson-data`** in your home directory.
