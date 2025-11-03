@@ -19,9 +19,9 @@ This lesson requires a terminal application. Our shell will be bash.
 
 Some SLURM commands can be found below:
 
-squeue - View information about jobs.
+<b>squeue</b> - View information about jobs.
 
-<table class="table table-schedmd">
+<table class="table table-striped">
 <tr><th>squeue option</th> <th>meaning</th></tr>
 <tr><th>read</th> <td>no</td></tr>
 <tr><th>--account=<name></th> <td>View only jobs with specified accounts.</td></tr>
