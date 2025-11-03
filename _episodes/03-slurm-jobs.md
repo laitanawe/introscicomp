@@ -37,5 +37,11 @@ Some SLURM commands can be found below:
 </table>
 
 
+<table class="table table-striped">
+<tr><th>slurm option</th> <th>meaning</th><th></th><th></th></tr>
+<tr><th></th> <td></td><td></td><td></td></tr>
+<tr><th></th> <td></td><td></td><td></td></tr>
+</table>
+
 
 {% include links.md %}
