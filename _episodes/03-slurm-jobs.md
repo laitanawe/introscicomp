@@ -5,12 +5,15 @@ exercises: 45
 questions:
 - "How do we submit slurm jobs?"
 objectives:
+- JOB SUBMISSION
 - "Batch Jobs"
 - "Interactive Jobs"
+- "SLURM Batch Scripts"
 - "Mandatory Directives"
 - "Resource Directives"
 - "Recommended Service Units"
-- "SLURM Batch Scripts"
+- JOB MANAGEMENT
+- JOB ACCOUNTING
 - "Tasks"
 keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
