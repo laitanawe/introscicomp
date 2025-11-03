@@ -23,7 +23,6 @@ Some SLURM commands can be found below:
 
 <table class="table table-striped">
 <tr><th>squeue option</th> <th>meaning</th><th></th><th></th></tr>
-<tr><th></th> <td></td><td></td><td></td></tr>
 <tr><th>--account=account_name</th> <td>View only jobs with specified accounts.</td><td></td><td></td></tr>
 <tr><th>--clusters=cluster_name</th> <td>View jobs on specified clusters.</td><td></td><td></td></tr>
 <tr><th>--format=spec</th> <td>Output format to display. (e.g. "--format=¾i ¾j") Specify fields, size, order, etc.</td><td></td><td></td></tr>
