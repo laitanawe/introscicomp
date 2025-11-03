@@ -22,8 +22,7 @@ Some SLURM commands can be found below:
 <b>squeue:</b> View information about jobs.
 
 <table>
-
-<tr><th>--users=<names></th><td>View only jobs for specified users.</td></tr>
+<tr><td>--users=<names></td><td>View only jobs for specified users.</td></tr>
 </table>
 
 
