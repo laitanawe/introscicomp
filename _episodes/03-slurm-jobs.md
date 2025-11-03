@@ -21,7 +21,7 @@ Some SLURM commands can be found below:
 
 <b>squeue</b> - View information about jobs.
 
-<table class="table table-striped">
+<table>
 <tr><th>squeue option</th> <th>meaning</th></tr>
 <tr><th>read</th> <td>no</td></tr>
 <tr><th>--account=<name></th> <td>View only jobs with specified accounts.</td></tr>
