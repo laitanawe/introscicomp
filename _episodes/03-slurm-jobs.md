@@ -23,7 +23,7 @@ Some SLURM commands can be found below:
 
 <table class="table table-striped">
 <tr><td></td><th>squeue option</th><th>meaning</th><th></th></tr>
-<tr><td></td><th>user</th><th>group</th><th>all</th></tr>
+<tr><td></td><th>--account=<name></th><th>View only jobs with specified accounts.</th><th></th></tr>
 <tr><th>read</th><td>yes</td><td>yes</td><td>no</td></tr>
 <tr><th>write</th><td>yes</td><td>no</td><td>no</td></tr>
 <tr><th>execute</th><td>no</td><td>no</td><td>no</td></tr>
@@ -32,7 +32,7 @@ Some SLURM commands can be found below:
 <table class="table table-striped">
 <tr><th>squeue option</th> <th>meaning</th><th></th><th></th></tr>
 <tr><th></th> <td></td><td></td><td></td></tr>
-<tr><th>--account=<name></th> <td>View only jobs with specified accounts.</td><td></td><td></td></tr>
+<tr><th></th> <td></td><td></td><td></td></tr>
 <tr><th>--clusters=<name></th> <td>View jobs on specified clusters.</td><td></td><td></td></tr>
 <tr><th>--format=<spec></th> <td>Output format to display. (e.g. "--format=¾i ¾j") Specify fields, size, order, etc.</td><td></td><td></td></tr>
 <tr><th>--jobs=job_id_list</th> <td>Comma separated list of job IDs to display.</td><td></td><td></td></tr>
