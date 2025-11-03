@@ -28,7 +28,7 @@ Some SLURM commands can be found below:
 <tr><th>--clusters=cluster_name</th> <td>View jobs on specified clusters.</td><td></td><td></td></tr>
 <tr><th>--format=spec</th> <td>Output format to display. (e.g. "--format=¾i ¾j") Specify fields, size, order, etc.</td><td></td><td></td></tr>
 <tr><th>--jobs=job_id_list</th> <td>Comma separated list of job IDs to display.</td><td></td><td></td></tr>
-<tr><th>--name=name</th><td>View only jobs with specified names.</td><td></td><td></td></tr>
+<tr><th>--name=job_name</th><td>View only jobs with specified names.</td><td></td><td></td></tr>
 <tr><th>--partition=partition_names</th> <td>View only jobs in specified partitions.</td><td></td><td></td></tr>
 <tr><th>--priority</th> <td>Sort jobs by priority.</td><td></td><td></td></tr>
 <tr><th>--qos=qos_name</th> <td>View only jobs with specified Qualities Of Service.</td><td></td><td></td></tr>
