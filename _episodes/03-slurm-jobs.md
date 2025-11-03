@@ -19,7 +19,7 @@ This lesson requires a terminal application. Our shell will be bash.
 
 Some SLURM commands can be found below:
 
-<b>squeue</b> - View information about jobs.
+<b>squeue:</b> View information about jobs.
 
 <table>
 <tr><th>squeue option</th> <th>meaning</th></tr>
