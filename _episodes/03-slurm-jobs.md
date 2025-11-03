@@ -22,6 +22,7 @@ Some SLURM commands can be found below:
 <b>squeue</b> - View information about jobs.
 
 <table class="table table-striped">
+<tr><td></td><th>squeue option</th><th>meaning</th><th></th></tr>
 <tr><td></td><th>user</th><th>group</th><th>all</th></tr>
 <tr><th>read</th><td>yes</td><td>yes</td><td>no</td></tr>
 <tr><th>write</th><td>yes</td><td>no</td><td>no</td></tr>
