@@ -117,9 +117,9 @@ $ ls -F
 {: .language-bash}
 
 ### Associations on the Cluster
-An Association is a managed shared workspace on Sasquatch that ensures reliable compute access, consistent software environments, and efficient collaboration and storage management. This is especially good for classes and group projects.
+An Association is a managed shared workspace on Sasquatch that ensures reliable compute access, consistent software environments, and efficient collaboration and storage management. This is especially good for group projects and classes like Intro to Scientific Computing.
 
-Why create association for the Linux class?
+Why create association for this Linux class?
 - Shared file system and resources, primarily:  When/if the cluster reaches high load, you may not have compute resources available during class time.  We'll need to use resource reservations to address this issue, and tying it with an Association is the easiest method to enable this.
 
 Data for the class examples can be found at the following location:
