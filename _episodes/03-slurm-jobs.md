@@ -66,6 +66,11 @@ srun - Obtain a job allocation (as needed) and execute an application.
 <tr><th></th> <td></td><td></td><td></td></tr>
 </table>
 
+## Software Versioning
 
+We've learned how to load and unload software packages. This is very useful. However, we have not yet addressed the issue of software versioning. At some point or other, you will run into issues where only one particular version of some software will be suitable. Perhaps a key bugfix only happened in a certain version, or version X broke compatibility with a file format you use.
+In either of these example cases, it helps to be very specific about what software is loaded.
+
+Let's examine the output of `module avail` more closely.
 
 {% include links.md %}
