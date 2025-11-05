@@ -47,10 +47,11 @@ On login you may start out with a default set of modules loaded or you may start
 To see available software modules, use `module avail`:
 
 ```
-{: .language-bash}
-```
-```
 $ module avail
+```
+{: .language-bash}
+
+```
 -------------------------------------------------------------- /cm/local/modulefiles ---------------------------------------------------------------
 boost/1.81.0             cm-bios-tools  dot              gpfs5/1.0.0      luajit        module-info  python3   slurm/slurm/24.11.3  
 cluster-tools-dell/10.0  cmd            freeipmi/1.6.14  ipmitool/1.8.19  mariadb-libs  null         python39  
