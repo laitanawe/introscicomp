@@ -86,6 +86,74 @@ bowtie/cliseqtools_apptainer    cliSeqTools/cliseqtools_apptainer  R/R_apptainer
 bwa/cliseqtools_apptainer       fastqc/cliseqtools_apptainer       salmon/cliseqtools_apptainer
 ```
 {: .output}
->>>>>>> 092187cc4d37a8f6d07a4339576400f00fd35f9f
+
+
+### Listing Currently Loaded Modules
+
+You can use the `module list` command to see which modules you currently have loaded in your environment. If you have no modules loaded, you will see a message telling you so
+
+```
+$ module list
+```
+{: .language-bash}
+
+<!--
+
+-->
+
+## Loading and Unloading Software
+
+To load a software module, use `module load`. In this example we will use Python 3.
+
+Initially, Python 3 is not loaded. We can test this by using the `which` command. `which` looks for programs the same way that Bash does, so we can use it to tell us where a particular piece of software is stored.
+
+```
+$ which python3
+```
+{: .language-bash}
+
+<!--
+
+-->
+
+We can load the `python3` command with `module load`:
+
+<!--
+
+-->
+
+So, what just happened?
+
+To understand the output, first we need to understand the nature of the `$PATH` environment variable. `$PATH` is a special environment variable that controls where a UNIX system looks for software. Specifically `$PATH` is a list of directories (separated by `:`) that the OS searches through for a command before giving up and telling us it can't find it. As with all environment
+variables we can print it out using `echo`.
+
+```
+$ echo $PATH
+```
+{: .language-bash}
+
+<!--
+
+-->
+
+You'll notice a similarity to the output of the `which` command. In this case, there's only one difference: the different directory at the beginning. When we ran the `module load` command, it added a directory to the beginning of our `$PATH`. Let's examine what's there:
+
+<!--
+
+-->
+
+Taking this to its conclusion, `module load` will add software to your `$PATH`. It "loads" software. A special note on this - depending on which version of the `module` program that is installed at your site, `module load` will also load required software dependencies.
+
+<!--
+
+-->
+
+Note that this module loading process happens principally through the manipulation of environment variables like `$PATH`. There is usually little or no data transfer involved.
+
+The module loading process manipulates other special environment variables as well, including variables that influence where the system looks for software libraries, and sometimes variables which tell commercial software packages where to find license servers.
+
+The module command also restores these shell environment variables to their previous state when a module is unloaded.
+
+
 
 {% include links.md %}
