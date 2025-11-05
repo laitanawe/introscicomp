@@ -28,8 +28,8 @@ You need to download some files to follow this lesson.
     {: .output}
 
 **Let your instructor know if you need help with this step**.
-You should end up with the folder called **`shell-lesson-data`** in your user directory for the class.
-You should also end up with certain files within the folder **`files`** in your user directory for the class.
+You should end up with the folder called **`shell-lesson-data`** under the Desktop directory in your user directory for the class.
+You should also end up with certain files within the folder **`files`** under the Desktop directory in your user directory for the class.
 
 ### Associations on the Cluster
 An Association is a managed shared workspace on Sasquatch that ensures reliable compute access, consistent software environments, and efficient collaboration and storage management. This is especially good for group projects and classes like Intro to Scientific Computing.
