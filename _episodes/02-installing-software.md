@@ -51,7 +51,9 @@ To see available software modules, use `module avail`:
 ```
 {: .language-bash}
 
+<!--
 {% include {{ site.snippets }}/modules/available-modules.snip %}
+-->
 
 ### Listing Currently Loaded Modules
 
@@ -62,7 +64,9 @@ You can use the `module list` command to see which modules you currently have lo
 ```
 {: .language-bash}
 
+<!--
 {% include {{ site.snippets }}/modules/default-modules.snip %}
+-->
 
 ## Loading and Unloading Software
 
@@ -79,9 +83,11 @@ Initially, Python 3 is not loaded. We can test this by using the `which` command
 
 We can load the `python3` command with `module load`:
 
+<!--
 {% include {{ site.snippets }}/modules/module-load-python.snip %}
 
 {% include {{ site.snippets }}/modules/python-executable-dir.snip %}
+-->
 
 So, what just happened?
 
@@ -93,17 +99,23 @@ variables we can print it out using `echo`.
 ```
 {: .language-bash}
 
+<!--
 {% include {{ site.snippets }}/modules/python-module-path.snip %}
+-->
 
 You'll notice a similarity to the output of the `which` command. In this case, there's only one difference: the different directory at the beginning. When we ran the `module load` command, it added a directory to the beginning of our `$PATH`. Let's examine what's there:
 
+<!--
 {% include {{ site.snippets }}/modules/python-ls-dir-command.snip %}
 
 {% include {{ site.snippets }}/modules/python-ls-dir-output.snip %}
+-->
 
 Taking this to its conclusion, `module load` will add software to your `$PATH`. It "loads" software. A special note on this - depending on which version of the `module` program that is installed at your site, `module load` will also load required software dependencies.
 
+<!--
 {% include {{ site.snippets }}/modules/software-dependencies.snip %}
+-->
 
 Note that this module loading process happens principally through the manipulation of environment variables like `$PATH`. There is usually little or no data transfer involved.
 
