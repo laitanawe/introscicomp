@@ -18,7 +18,7 @@ You need to download some files to follow this lesson.
     {: .language-bash}
 
     ~~~
-    $ ls data/hps/assoc/private/intro_to_sci_comp/user/$USER/Desktop
+    $ ls /data/hps/assoc/private/intro_to_sci_comp/user/$USER/Desktop
     ~~~
     {: .language-bash}
 
@@ -26,6 +26,11 @@ You need to download some files to follow this lesson.
     files  shell-lesson-data
     ~~~
     {: .output}
+
+    ~~~
+    $ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/Desktop
+    ~~~
+    {: .language-bash}
 
 **Let your instructor know if you need help with this step**.
 You should end up with the folder called **`shell-lesson-data`** under the Desktop directory in your user directory for the class.
