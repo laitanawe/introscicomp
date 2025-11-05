@@ -66,5 +66,54 @@ srun - Obtain a job allocation (as needed) and execute an application.
 <tr><th></th> <td></td><td></td><td></td></tr>
 </table>
 
+## Software Versioning
+
+We've learned how to load and unload software packages. This is very useful. However, we have not yet addressed the issue of software versioning. At some point or other, you will run into issues where only one particular version of some software will be suitable. Perhaps a key bugfix only happened in a certain version, or version X broke compatibility with a file format you use.
+In either of these example cases, it helps to be very specific about what software is loaded.
+
+Let's examine the output of `module avail` more closely.
+
+```
+{{ site.remote.prompt }} module avail
+```
+{: .language-bash}
+
+{% include {{ site.snippets }}/modules/available-modules.snip %}
+
+{% include {{ site.snippets }}/modules/wrong-gcc-version.snip %}
+
+> ## Using Software Modules in Scripts
+>
+> Create a job that is able to run `python3 --version`. Remember, no software
+> is loaded by default! Running a job is just like logging on to the system
+> (you should not assume a module loaded on the login node is loaded on a
+> compute node).
+>
+> > ## Solution
+> >
+> > ```
+> > {{ site.remote.prompt }} nano python-module.sh
+> > {{ site.remote.prompt }} cat python-module.sh
+> > ```
+> > {: .language-bash}
+> >
+> > ```
+> > {{ site.remote.bash_shebang }}
+> > {{ site.sched.comment }} {{ site.sched.flag.partition }}{% if site.sched.flag.qos %}
+> > {{ site.sched.comment }} {{ site.sched.flag.qos }}
+> > {% endif %}{{ site.sched.comment }} {{ site.sched.flag.time }} 00:00:30
+> >
+> > module load {{ site.remote.module_python3 }}
+> >
+> > python3 --version
+> > ```
+> > {: .output}
+> >
+> > ```
+> > {{ site.remote.prompt }} {{ site.sched.submit.name }} {% if site.sched.submit.options != '' %}{{ site.sched.submit.options }} {% endif %}python-module.sh
+> > ```
+> > {: .language-bash}
+> {: .solution}
+{: .challenge}
 
 {% include links.md %}
