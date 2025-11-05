@@ -16,7 +16,7 @@ objectives:
 - JOB ACCOUNTING
 - "Tasks"
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "The queuing system facilitates executing tasks"
 ---
 This lesson requires a terminal application. Our shell will be bash.
 
