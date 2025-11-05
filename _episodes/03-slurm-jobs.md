@@ -35,16 +35,15 @@ cat serial-job.sh
 Use `ls` to locate the output file. The `-t` flag sorts in
 reverse-chronological order: newest first. What was the output?
 
-> ## Read the Job Output
->
-> The cluster output should be written to a file in the folder you launched the
-> job from. For example,
->
-> ```
-> ls -t
-> ```
-> {: .language-bash}
-> ```
+## Read the Job Output
+
+The cluster output should be written to a file in the folder you launched the job from. For example,
+
+```
+ls -t
+```
+{: .language-bash}
+```
 
 <b>squeue</b> - View information about jobs.
 
