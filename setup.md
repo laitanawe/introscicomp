@@ -13,17 +13,12 @@ You need to download some files to follow this lesson.
 
 2. You can use the following commands to copy the data. If you want to highlight this command and copy, do not highlight the $:
     ~~~
-    $ cp -Rv /data/hps/assoc/private/intro_to_sci_comp/data/shell-lesson-data /data/hps/assoc/private/intro_to_sci_comp/user/$USER
+    $ cp -Rv /data/hps/assoc/private/intro_to_sci_comp/data/Desktop /data/hps/assoc/private/intro_to_sci_comp/user/$USER
     ~~~
     {: .language-bash}
 
     ~~~
-    $ cp -Rv /data/hps/assoc/private/intro_to_sci_comp/data/files /data/hps/assoc/private/intro_to_sci_comp/user/$USER
-    ~~~
-    {: .language-bash}
-
-    ~~~
-    $ ls data/hps/assoc/private/intro_to_sci_comp/user/$USER
+    $ ls data/hps/assoc/private/intro_to_sci_comp/user/$USER/Desktop
     ~~~
     {: .language-bash}
 
