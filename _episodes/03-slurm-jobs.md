@@ -39,6 +39,26 @@ Some SLURM commands can be found below:
 <tr><th>--users=user_name</th> <td>View only jobs for specified users.</td><td></td><td></td></tr>
 </table>
 
+Job Submission
+salloc - Obtain a job allocation.
+sbatch - Submit a batch script for later execution.
+srun - Obtain a job allocation (as needed) and execute an application.
+
+<table class="table table-striped">
+<tr><th>slurm option</th> <th>meaning</th><th></th><th></th></tr>
+<tr><th></th> <td></td> <td></td><td></td></tr>
+<tr><th></th> <td></td> <td></td><td></td></tr>
+<tr><th></th> <td></td> <td></td><td></td></tr>
+<tr><th></th> <td></td> <td></td><td></td></tr>
+<tr><th></th> <td></td> <td></td><td></td></tr>
+<tr><th></th> <td></td> <td></td><td></td></tr>
+<tr><th></th> <td>File in which to store job output.</td> <td></td><td></td></tr>
+<tr><th></th> <td>Partition/queue in which to run the job.</td> <td></td><td></td></tr>
+<tr><th></th> <td>Quality Of Service.</td> <td></td><td></td></tr>
+<tr><th></th> <td>Signal job when approaching time limit.</td> <td></td><td></td></tr>
+<tr><th></th> <td>Wall clock time limit.</td> <td></td><td></td></tr>
+<tr><th></th> <td>Wrap specified command in a simple "sh" shell. (sbatch command only)</td> <td></td><td></td></tr>
+</table>
 
 <table class="table table-striped">
 <tr><th>slurm option</th> <th>meaning</th><th></th><th></th></tr>
