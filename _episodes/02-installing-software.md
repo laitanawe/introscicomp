@@ -50,5 +50,44 @@ To see available software modules, use `module avail`:
 $ module avail
 ```
 {: .language-bash}
+<<<<<<< HEAD
+=======
+
+```
+-------------------------------------------------------------- /cm/local/modulefiles ---------------------------------------------------------------
+boost/1.81.0             cm-bios-tools  dot              gpfs5/1.0.0      luajit        module-info  python3   slurm/slurm/24.11.3  
+cluster-tools-dell/10.0  cmd            freeipmi/1.6.14  ipmitool/1.8.19  mariadb-libs  null         python39  
+cluster-tools/10.0       cmjob          gcc/13.1.0       lua/5.4.6        module-git    openldap     shared    
+
+-------------------------------------------------------------- /cm/shared/modulefiles --------------------------------------------------------------
+blacs/openmpi/gcc/64/1.1patch03  gcc12/12.2.0                                   hpcx/mlnx-ofed5-cuda11/2.13.1/hpcx-stack  openmpi4/gcc/4.1.5  
+blas/gcc/64/3.11.0               gdb/13.1                                       hwloc/1.11.13                             ucx/1.10.1          
+bonnie++/2.00a                   globalarrays/openmpi/gcc/64/5.8                hwloc2/2.8.0                              
+cm-pmix3/3.1.7                   gpfs5/1.0.0                                    intel-cluster-runtime/ia32/2019.6         
+cm-pmix4/4.1.3                   hdf5/1.14.0                                    intel-cluster-runtime/intel64/(default)   
+cuda11.8/blas/11.8.0             hdf5_18/1.8.21                                 intel-cluster-runtime/intel64/2019.6      
+cuda11.8/fft/11.8.0              hpcx/2.4.0                                     iozone/3.494                              
+cuda11.8/toolkit/11.8.0          hpcx/mlnx-ofed5-cuda11/2.13.1/hpcx             lapack/gcc/64/3.11.0                      
+cuda12.2/blas/12.2.2             hpcx/mlnx-ofed5-cuda11/2.13.1/hpcx-debug       mpich/ge/gcc/64/4.1.1                     
+cuda12.2/fft/12.2.2              hpcx/mlnx-ofed5-cuda11/2.13.1/hpcx-debug-ompi  mvapich2/gcc/64/2.3.7                     
+cuda12.2/toolkit/12.2.2          hpcx/mlnx-ofed5-cuda11/2.13.1/hpcx-mt          netcdf/gcc/64/gcc/64/4.9.2                
+cudnn8.6-cuda11.8/8.6.0.163      hpcx/mlnx-ofed5-cuda11/2.13.1/hpcx-mt-ompi     netperf/2.7.0                             
+cudnn8.9-cuda12.2/8.9.7.29       hpcx/mlnx-ofed5-cuda11/2.13.1/hpcx-ompi        openblas/dynamic/(default)                
+default-environment              hpcx/mlnx-ofed5-cuda11/2.13.1/hpcx-prof        openblas/dynamic/0.3.18                   
+fftw3/openmpi/gcc/64/3.3.10      hpcx/mlnx-ofed5-cuda11/2.13.1/hpcx-prof-ompi   openmpi/gcc/64/4.1.5                      
+
+-------------------------------------------------------------- /data/hps/assoc/module --------------------------------------------------------------
+bioinformatics  
+
+--------------------------------------------------- /data/hps/assoc/public/bioinformatics/module ---------------------------------------------------
+0_modulefile_template           cellranger/7.2.0                   gatk/cliseqtools_apptainer          samtools/cliseqtools_apptainer      
+azcopy/v10                      cellranger/8.0.0                   minimap2/cliseqtools_apptainer      STAR/2.7.11b                        
+bcftools/cliseqtools_apptainer  cellranger/9.0.0                   multiqc/cliseqtools_apptainer       STAR_2.7.10a/cliseqtools_apptainer  
+bedtools/cliseqtools_apptainer  cellranger/9.0.1                   picard-tools/cliseqtools_apptainer  trim_galore/cliseqtools_apptainer   
+bowtie/cliseqtools_apptainer    cliSeqTools/cliseqtools_apptainer  R/R_apptainer                       
+bwa/cliseqtools_apptainer       fastqc/cliseqtools_apptainer       salmon/cliseqtools_apptainer
+```
+{: .output}
+>>>>>>> 092187cc4d37a8f6d07a4339576400f00fd35f9f
 
 {% include links.md %}
