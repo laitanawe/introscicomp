@@ -97,9 +97,11 @@ $ module list
 ```
 {: .language-bash}
 
-<!--
-
--->
+```
+Currently Loaded Modulefiles:
+ 1) bioinformatics   2) gcc/13.1.0   3) slurm/slurm/24.11.3   4) python3 
+```
+{: .output}
 
 ## Loading and Unloading Software
 
@@ -112,15 +114,24 @@ $ which python3
 ```
 {: .language-bash}
 
-<!--
+```
+/usr/bin/python3
+```
+{: .output}
 
--->
+We can load the `python3` command with `module load python3`:
 
-We can load the `python3` command with `module load`:
+```
+$ module load python3
+$ which python3
+```
+{: .language-bash}
 
-<!--
+```
+/cm/local/apps/python3/bin/python3
+```
+{: .output}
 
--->
 
 So, what just happened?
 
@@ -132,9 +143,10 @@ $ echo $PATH
 ```
 {: .language-bash}
 
-<!--
-
--->
+```
+/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/cm/local/apps/gcc/13.1.0/bin:/data/hps/home/oawe/.local/bin:/data/hps/home/oawe/bin:/cm/local/apps/environment-modules/4.5.3//bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin:/opt/dell/srvadmin/bin
+```
+{: .output}
 
 You'll notice a similarity to the output of the `which` command. In this case, there's only one difference: the different directory at the beginning. When we ran the `module load` command, it added a directory to the beginning of our `$PATH`. Let's examine what's there:
 
@@ -145,7 +157,9 @@ You'll notice a similarity to the output of the `which` command. In this case, t
 Taking this to its conclusion, `module load` will add software to your `$PATH`. It "loads" software. A special note on this - depending on which version of the `module` program that is installed at your site, `module load` will also load required software dependencies.
 
 <!--
-
+```
+```
+{: .output}
 -->
 
 Note that this module loading process happens principally through the manipulation of environment variables like `$PATH`. There is usually little or no data transfer involved.
