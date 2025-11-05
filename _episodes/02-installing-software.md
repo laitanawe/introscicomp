@@ -84,7 +84,9 @@ $ which python3
 ```
 {: .language-bash}
 
+<!--
 {% include {{ site.snippets }}/modules/missing-python.snip %}
+-->
 
 We can load the `python3` command with `module load`:
 
