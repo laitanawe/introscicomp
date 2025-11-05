@@ -150,9 +150,16 @@ $ echo $PATH
 
 You'll notice a similarity to the output of the `which` command. In this case, there's only one difference: the different directory at the beginning. When we ran the `module load` command, it added a directory to the beginning of our `$PATH`. Let's examine what's there:
 
-<!--
+```
+$ module unload python3
+$ which python3
+```
+{: .language-bash}
 
--->
+```
+/usr/bin/python3
+```
+{: .output}
 
 Taking this to its conclusion, `module load` will add software to your `$PATH`. It "loads" software. A special note on this - depending on which version of the `module` program that is installed at your site, `module load` will also load required software dependencies.
 
