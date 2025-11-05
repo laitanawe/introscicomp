@@ -55,11 +55,6 @@ Let's examine the output of `module avail` more closely.
 <table class="table table-striped">
 <tr><th>slurm option</th> <th>meaning</th><th></th><th></th></tr>
 <tr><th></th> <td></td> <td></td><td></td></tr>
-<tr><th></th> <td></td> <td></td><td></td></tr>
-<tr><th></th> <td></td> <td></td><td></td></tr>
-<tr><th></th> <td></td> <td></td><td></td></tr>
-<tr><th></th> <td></td> <td></td><td></td></tr>
-<tr><th></th> <td></td> <td></td><td></td></tr>
 <tr><th></th> <td>File in which to store job output.</td> <td></td><td></td></tr>
 <tr><th></th> <td>Partition/queue in which to run the job.</td> <td></td><td></td></tr>
 <tr><th></th> <td>Quality Of Service.</td> <td></td><td></td></tr>
