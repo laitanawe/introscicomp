@@ -45,9 +45,14 @@ On login you may start out with a default set of modules loaded or you may start
 ### Listing Available Modules
 
 To see available software modules, use `module avail`:
-
+<!--
 ```
 {{ site.remote.prompt }} module avail
+```
+-->
+
+```
+$ module avail
 ```
 {: .language-bash}
 
@@ -60,7 +65,7 @@ To see available software modules, use `module avail`:
 You can use the `module list` command to see which modules you currently have loaded in your environment. If you have no modules loaded, you will see a message telling you so
 
 ```
-{{ site.remote.prompt }} module list
+$ module list
 ```
 {: .language-bash}
 
@@ -75,7 +80,7 @@ To load a software module, use `module load`. In this example we will use Python
 Initially, Python 3 is not loaded. We can test this by using the `which` command. `which` looks for programs the same way that Bash does, so we can use it to tell us where a particular piece of software is stored.
 
 ```
-{{ site.remote.prompt }} which python3
+$ which python3
 ```
 {: .language-bash}
 
@@ -95,7 +100,7 @@ To understand the output, first we need to understand the nature of the `$PATH` 
 variables we can print it out using `echo`.
 
 ```
-{{ site.remote.prompt }} echo $PATH
+$ echo $PATH
 ```
 {: .language-bash}
 
