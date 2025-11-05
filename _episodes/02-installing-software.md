@@ -50,8 +50,6 @@ To see available software modules, use `module avail`:
 $ module avail
 ```
 {: .language-bash}
-<<<<<<< HEAD
-=======
 
 ```
 -------------------------------------------------------------- /cm/local/modulefiles ---------------------------------------------------------------
