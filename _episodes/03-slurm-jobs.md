@@ -18,9 +18,33 @@ objectives:
 keypoints:
 - "The queuing system facilitates executing tasks"
 ---
-This lesson requires a terminal application. Our shell will be bash.
+This lesson requires the terminal. Our shell will be bash.
 
-Some SLURM commands can be found below:
+Some SLURM commands can be on this page:
+
+## Running a Job on a Compute Node
+
+Create a submission file, requesting one task on a single node, then launch it.
+
+```
+nano serial-job.sh
+cat serial-job.sh
+```
+{: .language-bash}
+
+Use `ls` to locate the output file. The `-t` flag sorts in
+reverse-chronological order: newest first. What was the output?
+
+> ## Read the Job Output
+>
+> The cluster output should be written to a file in the folder you launched the
+> job from. For example,
+>
+> ```
+> ls -t
+> ```
+> {: .language-bash}
+> ```
 
 <b>squeue</b> - View information about jobs.
 
