@@ -216,4 +216,151 @@ $ fasterq-dump --stdout -X 2 SRR390728
 ```
 {: .language-bash}
 
+### Software Instalation from the Source
+
+Each software package will have its own installation method, and therefore one has to carefully read the specific installation instructions before proceeding. However, a common pattern is to install a package from source code, using the following 3 steps:
+
+- <b>configure</b>: Here, the Linux environment is checked for dependencies, and any user settings can be specified. This is the place where one would choose the final installation directory. As a regular user, this would be somewhere under the home directory, e.g. $HOME/path/to/software, or you can put it in the bin directory of your association.
+
+```
+$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/sratoolkit.3.2.0-centos_linux64/bin/
+$ pwd
+```
+{: .language-bash}
+
+- <b>make</b>: Compiles the source code and produces the executables.
+
+- <b>make install</b>: The executables are moved to their final destination and will be ready for use
+
+Within your association directory, you should install new software into bin, whether downloading a standalone executable or compiling from the source. When compiling software from source code, you will most likely use the GNU Compiler Collection (gcc). There are multiple versions of the gcc installed on the HPC. The operating system and the system libraries are all compiled with one particular version. Unless you have a good reason to do otherwise, you should compile your custom software using the same version of gcc as the operating system. Please check your versions first and make sure they match.
+
+Version of gcc used for system libraries:
+
+```
+$ strings -a /usr/lib/libc.so.6 | grep "GCC: ("
+```
+{: .language-bash}
+
+Version of gcc used for compilation:
+```
+$ gcc -v 2>&1 | grep version
+```
+{: .language-bash}
+
+### Downloading Software
+We will install the program HMMER into a test directory as an example.
+
+First, download the source code. Look up the website and find the link to the source code package appropriate for our system (Linux 64 bit). Then use program “curl” to retrieve the file archive:
+
+```
+$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/sratoolkit.3.2.0-centos_linux64/bin/
+$ curl -O http://eddylab.org/software/hmmer3/3.1b2/hmmer-3.1b2-linux-intel-x86_64.tar.gz
+```
+{: .language-bash}
+
+Untar the archive, which will create directory hmmer-3.1b2-linux-intel-x86_64:
+
+```
+$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/sratoolkit.3.2.0-centos_linux64/bin/
+$ tar -xzvf hmmer-3.1b2-linux-intel-x86_64.tar.gz
+```
+{: .language-bash}
+
+### Configure Software
+Change directory to hmmer-3.1b2-linux-intel-x86_64. Look for an executable called “configure” and run it with a “help” argument, to view usage options. Look for an option that specifies the final destination of the software:
+```
+$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/sratoolkit.3.2.0-centos_linux64/bin/
+$ cd hmmer-3.1b2-linux-intel-x86_64
+$ ./configure --help
+```
+{: .language-bash}
+
+Notice in the output the following lines:
+```
+...
+ 
+Installation directories:
+  --prefix=PREFIX         install architecture-independent files in PREFIX
+                          [/usr/local]
+  --exec-prefix=EPREFIX   install architecture-dependent files in EPREFIX
+                          [PREFIX]
+ 
+By default, `make install' will install all the files in
+`/usr/local/bin', `/usr/local/lib' etc.  You can specify
+an installation prefix other than `/usr/local' using `--prefix',
+for instance `--prefix=$HOME'.
+ 
+...
+```
+{: .output}
+Choose an installation prefix that puts the software into a test directory, just as an example. In a real installation you would have some naming pattern of your software directories that you would use. Now run configure for real:
+
+```
+$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/sratoolkit.3.2.0-centos_linux64/bin/
+$ installdir={{ < var path.examplelab >}}/bin }}
+$ ./configure --prefix=$installdir/hmmer
+```
+{: .language-bash}
+After making sure there were no errors during configuration, run the remaining 2 steps:
+
+### Install Software using Make
+```
+$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/sratoolkit.3.2.0-centos_linux64/bin/
+$ make
+$ make install
+```
+{: .language-bash}
+
+
+Check that files have been placed in the chosen destination directory:
+```
+$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/sratoolkit.3.2.0-centos_linux64/bin/
+$ ls -lF $installdir/hmmer/
+```
+{: .language-bash}
+
+```
+total 0
+drwxr-xr-x 2 mmouse upg-mmouse 4096 Oct 31 18:28 bin/
+drwxr-xr-x 2 mmouse upg-mmouse 4096 Oct 31 18:28 include/
+drwxr-xr-x 2 mmouse upg-mmouse 4096 Oct 31 18:28 lib/
+drwxr-xr-x 4 mmouse upg-mmouse 4096 Oct 31 18:28 share/
+
+```
+{: .output}
+Installation of the software is now complete. You can test that the software can be run:
+```
+$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/sratoolkit.3.2.0-centos_linux64/bin/
+$ ~/test/hmmer/bin/nhmmer -h
+```
+{: .language-bash}
+
+```
+# nhmmer :: search a DNA model or alignment against a DNA database
+# HMMER 3.1b2 (February 2015); http://hmmer.org/
+# Copyright (C) 2015 Howard Hughes Medical Institute.
+# Freely distributed under the GNU General Public License (GPLv3).
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Usage: nhmmer [options] <query hmmfile|alignfile> <target seqfile>
+ 
+Basic options:
+  -h : show brief help on version and usage
+ 
+Options directing output:
+  -o <f>             : direct output to file <f>, not stdout
+  -A <f>             : save multiple alignment of all hits to file <f>
+...
+
+```
+{: .output}
+
+### Clean up
+You can clean up by removing the downloaded archive and the untared installer files
+```
+$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/sratoolkit.3.2.0-centos_linux64/bin/
+$ rm hmmer-3.1b2-linux-intel-x86_64.tar.gz
+$ rm -r hmmer-3.1b2-linux-intel-x86_64
+```
+{: .language-bash}
+
 {% include links.md %}
