@@ -17,6 +17,7 @@ keypoints:
 - "The module system handles software versioning and package conflicts for you
   automatically."
 ---
+## Loading Software Modules
 
 On a high-performance computing system, it is seldom the case that the software we want to use is available when we log in. It is installed, but we will need to "load" it before it can run.
 
@@ -175,6 +176,44 @@ The module loading process manipulates other special environment variables as we
 
 The module command also restores these shell environment variables to their previous state when a module is unloaded.
 
+## Directly Installing Software
 
+The majority of Linux software can be installed by a regular user for their own use. No involvement from a system administrator is required. The easiest situation is when a binary executable is provided, but if you need to compile source code on Sasquatch that is also possible. Within your association directory there should be a bin directory, which is where executable software should go.
+
+### Precompiled binaries
+
+One example of software that is provided as a binary is SRA Toolkit. Here I am downloading it according to their instructions, into my group’s association. I unzip it and then change permissions so that the rest of my group can move or delete it if they need to.
+```
+$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/
+$ wget --output-document sratoolkit.tar.gz https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/current/sratoolkit.current-centos_linux64.tar.gz
+$ tar -xzvf sratoolkit.tar.gz
+$ chmod -Rv 2775 sratoolkit.3.2.0-centos_linux64
+$ ls -F
+$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/sratoolkit.3.2.0-centos_linux64/bin/
+$ pwd
+```
+{: .language-bash}
+
+Now copy the output from the pwd command and export it to your path. To add it to your path just for this session.
+ 
+```
+$ export PATH=$PATH:/data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/sratoolkit.3.2.0-centos_linux64/bin/
+```
+{: .language-bash}
+
+
+It can be added just for this session when you run that export command from the command line, or it can be added by appending that export line line of code to ~/.bashrc if you always want to have SRA toolkit available. Remember the way to append things to a text file.
+```
+$ echo "export PATH=$PATH:/data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/sratoolkit.3.2.0-centos_linux64/bin/" >> ~/.bashrc
+```
+{: .language-bash}
+
+You can check that fasterq-dump is on your path now:
+```
+$ which fasterq-dump
+$ fasterq-dump --version
+$ fasterq-dump --stdout -X 2 SRR390728
+```
+{: .language-bash}
 
 {% include links.md %}
