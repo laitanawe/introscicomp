@@ -216,7 +216,7 @@ $ fasterq-dump --stdout -X 2 SRR390728
 ```
 {: .language-bash}
 
-### Software Instalation from the Source
+### Software Installation from the Source
 
 Each software package will have its own installation method, and therefore one has to carefully read the specific installation instructions before proceeding. However, a common pattern is to install a package from source code, using the following 3 steps:
 
