@@ -275,10 +275,16 @@ $ curl -O http://eddylab.org/software/hmmer3/3.1b2/hmmer-3.1b2-linux-intel-x86_6
 Untar the archive, which will create directory hmmer-3.1b2-linux-intel-x86_64:
 
 ```
-$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/sratoolkit.3.2.0-centos_linux64/bin/
 $ tar -xzvf hmmer-3.1b2-linux-intel-x86_64.tar.gz
+$ ls -F
 ```
 {: .language-bash}
+
+```
+hmmer-3.1b2-linux-intel-x86_64/        sratoolkit.3.2.0-centos_linux64/
+hmmer-3.1b2-linux-intel-x86_64.tar.gz  sratoolkit.tar.gz
+```
+{: .output}
 
 ### Configure Software
 Change directory to hmmer-3.1b2-linux-intel-x86_64. Look for an executable called “configure” and run it with a “help” argument, to view usage options. Look for an option that specifies the final destination of the software:
