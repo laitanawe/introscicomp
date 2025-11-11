@@ -311,16 +311,36 @@ Notice in the output the following lines:
 ```
 ...
  
-Installation directories:
-  --prefix=PREFIX         install architecture-independent files in PREFIX
-                          [/usr/local]
-  --exec-prefix=EPREFIX   install architecture-dependent files in EPREFIX
-                          [PREFIX]
- 
-By default, `make install' will install all the files in
-`/usr/local/bin', `/usr/local/lib' etc.  You can specify
-an installation prefix other than `/usr/local' using `--prefix',
-for instance `--prefix=$HOME'.
+                        disable compiler optimizations that would produce
+                          unportable binaries
+  --disable-pic           compile PIC objects [default=enabled for shared
+                          builds on supported platforms]
+  --disable-largefile     omit support for large files
+
+Optional Packages:
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-xlc-arch=<arch>  specify architecture <arch> for xlc -qarch
+  --with-gsl              use the GSL, GNU Scientific Library (default is no)
+  --with-gcc-arch=<arch>  use architecture <arch> for gcc -march/-mtune,
+                          instead of guessing
+
+Some influential environment variables:
+  CC          C compiler command
+  CFLAGS      C compiler flags
+  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
+              nonstandard directory <lib dir>
+  LIBS        libraries to pass to the linker, e.g. -l<library>
+  CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
+              you have headers in a nonstandard directory <include dir>
+  MPICC       MPI C compiler command
+  CPP         C preprocessor
+  PIC_FLAGS   compiler flags for PIC code
+
+Use these variables to override the choices made by `configure' or to help
+it to find libraries and programs with nonstandard names/locations.
+
+Report bugs to <eddys@janelia.hhmi.org>.
  
 ...
 ```
