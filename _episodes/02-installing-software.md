@@ -252,7 +252,7 @@ $ gcc -v 2>&1 | grep version
 ```
 {: .language-bash}
 
-> ## Absolute vs Relative Paths
+> ## Exercise
 >
 > Using knowledge gained from our previous class, how else can you determine the version of gcc used for compilation?
 >
