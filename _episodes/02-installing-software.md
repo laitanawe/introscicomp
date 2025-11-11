@@ -551,6 +551,17 @@ removed 'hmmer-3.1b2-linux-intel-x86_64.tar.gz'
 ```
 {: .output}
 
+Confirm that you're in your association directory before cleaning up or deleting files.
+```
+$ pwd
+```
+{: .language-bash}
+
+```
+/data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin
+```
+{: .output}
+
 ```
 $ rm -Rv hmmer-3.1b2-linux-intel-x86_64
 ```
