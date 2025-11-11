@@ -347,43 +347,136 @@ Report bugs to <eddys@janelia.hhmi.org>.
 {: .output}
 Choose an installation prefix that puts the software into a test directory, just as an example. In a real installation you would have some naming pattern of your software directories that you would use. Now run configure for real:
 
-```
-$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/
+<!--
 $ installdir={{ < var path.examplelab >}}/bin }}
+-->
+
+```
+$ installdir=/data/hps/assoc/private/intro_to_sci_comp/user/oawe/bin/hmmer-3.1b2-linux-intel-x86_64
 $ ./configure --prefix=$installdir/hmmer
 ```
 {: .language-bash}
+
+```
+checking for ntohl... yes
+checking for htons... yes
+checking for htonl... yes
+checking for _LARGEFILE_SOURCE value needed for large files... no
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... no
+configure: creating ./config.status
+config.status: creating documentation/Makefile
+config.status: creating documentation/man/Makefile
+config.status: creating src/Makefile
+config.status: creating testsuite/Makefile
+config.status: creating profmark/Makefile
+config.status: creating src/impl_sse/Makefile
+config.status: creating easel/miniapps/Makefile
+config.status: creating easel/testsuite/Makefile
+config.status: creating easel/Makefile
+config.status: creating libdivsufsort/Makefile
+config.status: creating Makefile
+config.status: creating src/p7_config.h
+config.status: creating easel/esl_config.h
+config.status: creating libdivsufsort/divsufsort.h
+config.status: linking src/impl_sse to src/impl
+
+
+HMMER configuration:
+     compiler:             gcc -O3 -fomit-frame-pointer -fstrict-aliasing -march=amdfam10 -msse2  -fPIC
+     host:                 x86_64-unknown-linux-gnu
+     linker:               
+     libraries:              
+     DP implementation:    sse
+```
+{: .output}
+
 After making sure there were no errors during configuration, run the remaining 2 steps:
 
 ### Install Software using Make
 ```
-$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/
+$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/hmmer-3.1b2-linux-intel-x86_64
 $ make
+```
+{: .language-bash}
+
+```
+     GEN jackhmmer
+     CC phmmer.o
+     GEN phmmer
+     CC nhmmer.o
+     GEN nhmmer
+     CC nhmmscan.o
+     GEN nhmmscan
+     CC hmmpgmd.o
+     GEN hmmpgmd
+     CC hmmc2.o
+hmmc2.c: In function ‘main’:
+hmmc2.c:364:7: warning: ‘strncat’ specified bound 4096 equals destination size [-Wstringop-overflow=]
+  364 |       strncat(opts, s,    MAX_READ_LEN);
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     GEN hmmc2
+     CC makehmmerdb.o
+     GEN makehmmerdb
+     CC hmmerfm-exactmatch.o
+     GEN hmmerfm-exactmatch
+make[1]: Leaving directory '/data/hps/assoc/private/intro_to_sci_comp/user/oawe/bin/hmmer-3.1b2-linux-intel-x86_64/src'
+     SUBDIR profmark
+make[1]: Entering directory '/data/hps/assoc/private/intro_to_sci_comp/user/oawe/bin/hmmer-3.1b2-linux-intel-x86_64/profmark'
+     CC create-profmark.o
+     GEN create-profmark
+     CC rocplot.o
+     GEN rocplot
+make[1]: Leaving directory '/data/hps/assoc/private/intro_to_sci_comp/user/oawe/bin/hmmer-3.1b2-linux-intel-x86_64/profmark'
+```
+{: .output}
+
+
+```
 $ make install
 ```
 {: .language-bash}
 
+```
+...
+for file in hmmer.h cachedb.h p7_gbands.h p7_gmxb.h p7_gmxchk.h p7_hmmcache.h; do \
+   /usr/bin/install -c -m 0644 ./$file /data/hps/assoc/private/intro_to_sci_comp/user/oawe/bin/hmmer-3.1b2-linux-intel-x86_64/hmmer/include/ ;\
+done
+/usr/bin/install -c -m 0644 p7_config.h /data/hps/assoc/private/intro_to_sci_comp/user/oawe/bin/hmmer-3.1b2-linux-intel-x86_64/hmmer/include/ ;\
+
+make[1]: Leaving directory '/data/hps/assoc/private/intro_to_sci_comp/user/oawe/bin/hmmer-3.1b2-linux-intel-x86_64/src'
+     SUBDIR documentation
+make[1]: Entering directory '/data/hps/assoc/private/intro_to_sci_comp/user/oawe/bin/hmmer-3.1b2-linux-intel-x86_64/documentation'
+     SUBDIR man
+make[2]: Entering directory '/data/hps/assoc/private/intro_to_sci_comp/user/oawe/bin/hmmer-3.1b2-linux-intel-x86_64/documentation/man'
+for file in hmmer hmmalign hmmbuild hmmconvert hmmemit hmmfetch hmmlogo hmmpgmd hmmpress hmmscan hmmsearch hmmsim hmmstat jackhmmer makehmmerdb phmmer nhmmer nhmmscan alimask; do \
+   /usr/bin/install -c -m 0755 ./$file.man /data/hps/assoc/private/intro_to_sci_comp/user/oawe/bin/hmmer-3.1b2-linux-intel-x86_64/hmmer/share/man/man1/${file}.1 ;\
+done
+make[2]: Leaving directory '/data/hps/assoc/private/intro_to_sci_comp/user/oawe/bin/hmmer-3.1b2-linux-intel-x86_64/documentation/man'
+make[1]: Leaving directory '/data/hps/assoc/private/intro_to_sci_comp/user/oawe/bin/hmmer-3.1b2-linux-intel-x86_64/documentation'
+```
+{: .output}
 
 Check that files have been placed in the chosen destination directory:
 ```
-$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/
+$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/hmmer-3.1b2-linux-intel-x86_64
 $ ls -lF $installdir/hmmer/
 ```
 {: .language-bash}
 
 ```
-total 0
-drwxr-xr-x 2 mmouse upg-mmouse 4096 Oct 31 18:28 bin/
-drwxr-xr-x 2 mmouse upg-mmouse 4096 Oct 31 18:28 include/
-drwxr-xr-x 2 mmouse upg-mmouse 4096 Oct 31 18:28 lib/
-drwxr-xr-x 4 mmouse upg-mmouse 4096 Oct 31 18:28 share/
+total 4
+drwxr-xr-x 2 oawe res-intro_to_sci_comp-s12-editor 4096 Nov 10 19:28 bin/
+drwxr-xr-x 2 oawe res-intro_to_sci_comp-s12-editor 4096 Nov 10 19:28 include/
+drwxr-xr-x 2 oawe res-intro_to_sci_comp-s12-editor 4096 Nov 10 19:28 lib/
+drwxr-sr-x 4 oawe res-intro_to_sci_comp-s12-editor 4096 Nov 10 19:28 share/
 
 ```
 {: .output}
 Installation of the software is now complete. You can test that the software can be run:
 ```
-$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/
-$ ~/test/hmmer/bin/nhmmer -h
+$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/hmmer-3.1b2-linux-intel-x86_64
+$ /data/hps/assoc/private/intro_to_sci_comp/user/oawe/bin/hmmer-3.1b2-linux-intel-x86_64/hmmer/bin/nhmmer -h
 ```
 {: .language-bash}
 
@@ -394,13 +487,52 @@ $ ~/test/hmmer/bin/nhmmer -h
 # Freely distributed under the GNU General Public License (GPLv3).
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Usage: nhmmer [options] <query hmmfile|alignfile> <target seqfile>
- 
+
 Basic options:
   -h : show brief help on version and usage
- 
+
 Options directing output:
   -o <f>             : direct output to file <f>, not stdout
   -A <f>             : save multiple alignment of all hits to file <f>
+  --tblout <f>       : save parseable table of hits to file <f>
+  --dfamtblout <f>   : save table of hits to file, in Dfam format <f>
+  --aliscoresout <f> : save scores for each position in each alignment to <f>
+  --hmmout <f>       : if input is alignment(s), write produced hmms to file <f>
+  --acc              : prefer accessions over names in output
+  --noali            : don't output alignments, so output is smaller
+  --notextw          : unlimit ASCII text output line width
+
+...
+  --F2 <x> : Stage 2 (Vit) threshold: promote hits w/ P <= F2  [3e-3]
+  --F3 <x> : Stage 3 (Fwd) threshold: promote hits w/ P <= F3  [3e-5]
+  --nobias : turn off composition bias filter
+
+Options for selecting query alphabet rather than guessing it:
+  --dna : input alignment is DNA sequence data
+  --rna : input alignment is RNA sequence data
+
+Options controlling seed search heuristic:
+  --seed_max_depth <n>     : seed length at which bit threshold must be met  [15]
+  --seed_sc_thresh <x>     : Default req. score for FM seed (bits)  [15]
+  --seed_sc_density <x>    : seed must maintain this bit density from one of two ends  [0.8]
+  --seed_drop_max_len <n>  : maximum run length with score under (max - [fm_drop_lim])  [4]
+  --seed_drop_lim <x>      : in seed, max drop in a run of length [fm_drop_max_len]  [0.3]
+  --seed_req_pos <n>       : minimum number consecutive positive scores in seed  [5]
+  --seed_consens_match <n> : <n> consecutive matches to consensus will override score threshold  [11]
+  --seed_ssv_length <n>    : length of window around FM seed to get full SSV diagonal  [70]
+
+Other expert options:
+  --tformat <s>      : assert target <seqdb> is in format <s>
+  --qformat <s>      : assert query <seqfile> is in format <s>
+  --nonull2          : turn off biased composition score corrections
+  -Z <x>             : set database size (Megabases) to <x> for E-value calculations  (x>0)
+  --seed <n>         : set RNG seed to <n> (if 0: one-time arbitrary seed)  [42]  (n>=0)
+  --w_beta <x>       : tail mass at which window length is determined
+  --w_length <n>     : window length - essentially max expected hit length
+  --block_length <n> : length of blocks read from target database (threaded)   (n>=50000)
+  --toponly          : only search the top strand
+  --bottomonly       : only search the bottom strand
+  --cpu <n>          : number of parallel CPU workers to use for multithreads  (n>=0)
 ...
 
 ```
@@ -410,9 +542,49 @@ Options directing output:
 You can clean up by removing the downloaded archive and the untared installer files
 ```
 $ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/
-$ rm hmmer-3.1b2-linux-intel-x86_64.tar.gz
-$ rm -r hmmer-3.1b2-linux-intel-x86_64
+$ rm -v hmmer-3.1b2-linux-intel-x86_64.tar.gz
 ```
 {: .language-bash}
+
+```
+removed 'hmmer-3.1b2-linux-intel-x86_64.tar.gz'
+```
+{: .output}
+
+```
+$ rm -Rv hmmer-3.1b2-linux-intel-x86_64
+```
+{: .language-bash}
+
+```
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/p7_alidisplay.o'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/generic_decoding.c'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/p7_bg.c'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/p7_gmxb.o'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/hmmlogo.c'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/generic_fwdback_chk.o'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/p7_hmmwindow.c'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/generic_optacc.c'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/hmmscan.c'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/phmmer.o'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/hmmpgmd.o'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/phmmer.c'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/p7_gmxchk.o'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/generic_msv.o'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/nhmmscan.c'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/hmmsim.c'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/p7_gmxchk.h'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/logsum.c'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/hmmer.o'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/hmmalign.o'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/evalues.o'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/hmmdmstr.c'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/hmmstat'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/p7_null3.o'
+removed 'hmmer-3.1b2-linux-intel-x86_64/src/hmmsim'
+removed directory 'hmmer-3.1b2-linux-intel-x86_64/src'
+removed directory 'hmmer-3.1b2-linux-intel-x86_64'
+```
+{: .output}
 
 {% include links.md %}
