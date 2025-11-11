@@ -352,7 +352,7 @@ $ installdir={{ < var path.examplelab >}}/bin }}
 -->
 
 ```
-$ installdir=/data/hps/assoc/private/intro_to_sci_comp/user/oawe/bin/hmmer-3.1b2-linux-intel-x86_64
+$ installdir=/data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/hmmer-3.1b2-linux-intel-x86_64
 $ ./configure --prefix=$installdir/hmmer
 ```
 {: .language-bash}
