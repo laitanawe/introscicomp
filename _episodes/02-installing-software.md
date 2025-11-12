@@ -171,6 +171,84 @@ $ which python3
 
 Taking this to its conclusion, `module load` will add software to your `$PATH`. It "loads" software. A special note on this - depending on which version of the `module` program that is installed at your site, `module load` will also load required software dependencies.
 
+```
+$ fastqc
+```
+{: .language-bash}
+
+module```
+-bash: fastqc: command not found
+```
+{: .output}
+
+```
+$ module load bioinformatics
+```
+{: .language-bash}
+
+```
+$ module load fastqc
+```
+{: .language-bash}
+
+```
+Use the following command to access common command line tools from the Bioinformatics CLI tools container.      
+Please notice that this command adds /data/hps/assoc to the container's internal bindpaths so you can access files within your home or association shares.
+
+        apptainer shell --bind /data/hps/assoc /data/hps/assoc/public/bioinformatics/container/cliSeqTools/BioinformaticsCliTools.sif
+```
+{: .output}
+
+```
+$ apptainer shell --bind /data/hps/assoc /data/hps/assoc/public/bioinformatics/container/cliSeqTools/BioinformaticsCliTools.sif
+```
+{: .language-bash}
+
+```
+$ fastqc --help
+```
+{: .language-bash}
+
+```
+    -a              Specifies a non-default file which contains the list of
+    --adapters      adapter sequences which will be explicity searched against
+                    the library. The file must contain sets of named adapters
+                    in the form name[tab]sequence.  Lines prefixed with a hash
+                    will be ignored.
+                    
+    -l              Specifies a non-default file which contains a set of criteria
+    --limits        which will be used to determine the warn/error limits for the
+                    various modules.  This file can also be used to selectively 
+                    remove some modules from the output all together.  The format
+                    needs to mirror the default limits.txt file found in the
+                    Configuration folder.
+                    
+   -k --kmers       Specifies the length of Kmer to look for in the Kmer content
+                    module. Specified Kmer length must be between 2 and 10. Default
+                    length is 7 if not specified.
+                    
+   -q --quiet       Supress all progress messages on stdout and only report errors.
+   
+   -d --dir         Selects a directory to be used for temporary files written when
+                    generating report images. Defaults to system temp directory if
+                    not specified.
+                    
+BUGS
+
+    Any bugs in fastqc should be reported either to simon.andrews@babraham.ac.uk
+    or in www.bioinformatics.babraham.ac.uk/bugzilla/
+                   
+    
+Apptainer>
+```
+{: .output}
+
+```
+Apptainer> exit 
+```
+{: .language-bash}
+
+
 <!--
 ```
 ```
