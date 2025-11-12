@@ -169,7 +169,7 @@ $ which python3
 ```
 {: .output}
 
-Taking this to its conclusion, `module load` will add software to your `$PATH`. It "loads" software. A special note on this - depending on which version of the `module` program that is installed at your site, `module load` will also load required software dependencies.
+Taking this to its conclusion, `module load` will add software to your `$PATH`. It "loads" software. A special note on this - depending on which version of the `module` program that is installed on the HPC cluster, `module load` will also load required software dependencies.
 
 ```
 $ fastqc
