@@ -4,9 +4,6 @@ teaching: 60
 exercises: 30
 questions:
 - "What is a command shell and why would I use one?"
-objectives:
-- "Explain how the shell relates to the keyboard, the screen, the operating system, and users' programs."
-- "Explain when and why command-line interfaces should be used instead of graphical interfaces."
 - How can I move around on my computer?
 - How can I see what files and directories I have?
 - How can I specify the location of a file or directory on my computer?
@@ -16,6 +13,10 @@ objectives:
 - Understanding file/directory permissions
 - How can I perform the same actions on many different files?
 - How do I turn a set of commands into a program?
+objectives:
+- "Explain how the shell relates to the keyboard, the screen, the operating system, and users' programs."
+- "Explain when and why command-line interfaces should be used instead of graphical interfaces."
+
 keypoints:
 - "A shell is a program whose primary purpose is to read commands and run other programs."
 -  "This lesson uses Bash, the default shell in many implementations of Unix."
