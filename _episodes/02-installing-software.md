@@ -35,6 +35,13 @@ Having access to multiple software versions allows a set of researchers to preve
 
 Dependencies are where a particular software package (or even a particular version) depends on having access to another software package (or even a particular version of another software package). For example, the VASP materials science software may depend on having a particular version of the FFTW (Fastest Fourier Transform in the West) software library available for it to work.
 
+To ensure that you are working from your association directory, run the following command:
+
+```
+$ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/
+```
+{: .language-bash}
+
 ## Environment Modules
 
 Environment modules are the solution to these problems. A _module_ is a self-contained description of a software package -- it contains the settings required to run a software package and, usually, encodes required dependencies on other software packages.
