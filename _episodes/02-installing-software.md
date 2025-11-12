@@ -3,8 +3,8 @@ title: "Installing Software"
 teaching: 45
 exercises: 45
 questions:
-- "How do you install software?"
 - "How do we load and unload software packages?"
+- "How do you install software?"
 objectives:
 - "Load and use a software package."
 - "Explain how the shell environment changes when the module mechanism loads or unloads packages."
