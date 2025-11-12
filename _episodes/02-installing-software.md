@@ -176,7 +176,8 @@ $ fastqc
 ```
 {: .language-bash}
 
-module```
+
+```
 -bash: fastqc: command not found
 ```
 {: .output}
@@ -561,7 +562,7 @@ drwxr-sr-x 4 oawe res-intro_to_sci_comp-s12-editor 4096 Nov 10 19:28 share/
 Installation of the software is now complete. You can test that the software can be run:
 ```
 $ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/hmmer-3.1b2-linux-intel-x86_64
-$ /data/hps/assoc/private/intro_to_sci_comp/user/oawe/bin/hmmer-3.1b2-linux-intel-x86_64/hmmer/bin/nhmmer -h
+$ /data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/hmmer-3.1b2-linux-intel-x86_64/hmmer/bin/nhmmer -h
 ```
 {: .language-bash}
 
