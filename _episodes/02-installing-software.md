@@ -171,17 +171,18 @@ $ which python3
 
 Taking this to its conclusion, `module load` will add software to your `$PATH`. It "loads" software. A special note on this - depending on which version of the `module` program that is installed on the HPC cluster, `module load` will also load required software dependencies.
 
+Let us use a bioinformatics tool like Fastqc on the cluster. Before loading the bioinformatics module, you get `command not found` when you run fastqc:
 ```
 $ fastqc
 ```
 {: .language-bash}
-
 
 ```
 -bash: fastqc: command not found
 ```
 {: .output}
 
+Now load the bioinformatics module:
 ```
 $ module load bioinformatics
 ```
@@ -205,6 +206,7 @@ $ apptainer shell --bind /data/hps/assoc /data/hps/assoc/public/bioinformatics/c
 ```
 {: .language-bash}
 
+You can run fastqc or other bioinformatics tools while you're within the container:
 ```
 $ fastqc --help
 ```
@@ -244,6 +246,7 @@ Apptainer>
 ```
 {: .output}
 
+To exit out of the container:
 ```
 Apptainer> exit 
 ```
