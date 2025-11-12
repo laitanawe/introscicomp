@@ -3,6 +3,9 @@ title: "SLURM Jobs"
 teaching: 45
 exercises: 45
 questions:
+- "What is a scheduler and why does a cluster need one?"
+- "How do I launch a program to run on a compute node in the cluster?"
+- "How do I capture the output of a program that is run on a node in the cluster?"
 - How can I be a responsible user of the HPC cluster?
 - "How do we submit slurm jobs?"
 objectives:
@@ -18,8 +21,15 @@ objectives:
 - JOB MANAGEMENT
 - JOB ACCOUNTING
 - "Tasks"
+- "Submit a simple script to the cluster."
+- "Monitor the execution of jobs using command line tools."
+- "Inspect the output and error files of your jobs."
+- "Find the right place to put large datasets on the cluster."
 keypoints:
 - "The queuing system facilitates executing tasks"
+- "The scheduler handles how compute resources are shared between users."
+- "A job is just a shell script."
+- "Request _slightly_ more resources than you will need."
 ---
 This lesson requires the terminal. Our shell will be bash.
 
