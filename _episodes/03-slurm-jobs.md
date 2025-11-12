@@ -31,7 +31,16 @@ keypoints:
 - "A job is just a shell script."
 - "Request _slightly_ more resources than you will need."
 ---
-This lesson requires the terminal. Our shell will be bash.
+## Job Scheduler
+
+An HPC system might have thousands of nodes and thousands of users. How do we decide who gets what and when? How do we ensure that a task is run with the resources it needs? This job is handled by a special piece of software called the _scheduler_. On an HPC system, the scheduler manages which jobs run where and when.
+
+The following illustration compares these tasks of a job scheduler to a waiter in a restaurant. If you can relate to an instance where you had to wait for a while in a queue to get in to a popular restaurant, then you may now understand why sometimes your job do not start instantly as in your laptop.
+
+The scheduler used in this lesson is SLURM. Although SLURM is not used everywhere, running jobs is quite similar regardless of what software is being used. The exact syntax might change, but the concepts remain the same.
+
+
+
 
 One of the major differences between using remote HPC resources and your own system (e.g. your laptop) is that remote resources are shared. How many users the resource is shared between at any one time varies from system to system, but it is unlikely you will ever be the only user logged into or using such a system.
 
