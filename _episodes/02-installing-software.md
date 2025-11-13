@@ -282,9 +282,12 @@ Singularity (aka Apptainer) was designed for shared environment HPCs. It is 'HPC
 
 Thankfully, you can directly run Docker images with Singularity. When you run 'singularity pull docker://ubuntu:22.04', Singularity downloads the relevant Docker image layers and metadata from DockerHub and converts it in Singularity Image Format (SIF). Singularity can then use this SIF file to build and run a Singularity container.
 
-{% include figure.html max-width="75%" caption=""
-   file="/fig/docker_vs_apptainer.jpeg"
+{% include figure.html max-width="45%" caption=""
+   file="/fig/docker_logo.jpeg"
    alt="Comparing Docker and Apptainer" %}
+   {% include figure.html max-width="45%" caption=""
+      file="/fig/apptainer_logo.jpeg"
+      alt="Comparing Docker and Apptainer" %}
 
 ## Directly Installing Software
 
