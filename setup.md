@@ -2,7 +2,7 @@
 title: Setup
 ---
 ## Download files
-You need to download some files to follow this lesson.
+You need to download some files to follow this course.
 
 <!--
 1. Download <a href="https://laitanawe.github.io/introscicomp/data/shell-lesson-data.zip">shell-lesson-data.zip</a> and move the file to your home directory.
@@ -11,7 +11,7 @@ You need to download some files to follow this lesson.
 1. Data for the class examples can be found at the following location:
 /data/hps/assoc/private/intro_to_sci_comp/data
 
-2. You can use the following commands to copy the data. If you want to highlight this command and copy, do not highlight the $:
+2. You can use the following commands to copy the data. If you want to highlight this command and copy, do not highlight the prompt or `$` at the beginning of the command:
     ~~~
     $ cp -Rv /data/hps/assoc/private/intro_to_sci_comp/data/Desktop /data/hps/assoc/private/intro_to_sci_comp/user/$USER
     ~~~
