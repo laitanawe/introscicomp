@@ -107,7 +107,7 @@ $ module list
 
 ```
 Currently Loaded Modulefiles:
- 1) bioinformatics   2) gcc/13.1.0   3) slurm/slurm/24.11.3   4) python3 
+ 1) bioinformatics   2) gcc/13.1.0   3) slurm/slurm/24.11.3   4) python3
 ```
 {: .output}
 
@@ -218,37 +218,37 @@ $ fastqc --help
                     the library. The file must contain sets of named adapters
                     in the form name[tab]sequence.  Lines prefixed with a hash
                     will be ignored.
-                    
+
     -l              Specifies a non-default file which contains a set of criteria
     --limits        which will be used to determine the warn/error limits for the
-                    various modules.  This file can also be used to selectively 
+                    various modules.  This file can also be used to selectively
                     remove some modules from the output all together.  The format
                     needs to mirror the default limits.txt file found in the
                     Configuration folder.
-                    
+
    -k --kmers       Specifies the length of Kmer to look for in the Kmer content
                     module. Specified Kmer length must be between 2 and 10. Default
                     length is 7 if not specified.
-                    
+
    -q --quiet       Supress all progress messages on stdout and only report errors.
-   
+
    -d --dir         Selects a directory to be used for temporary files written when
                     generating report images. Defaults to system temp directory if
                     not specified.
-                    
+
 BUGS
 
     Any bugs in fastqc should be reported either to simon.andrews@babraham.ac.uk
     or in www.bioinformatics.babraham.ac.uk/bugzilla/
-                   
-    
+
+
 Apptainer>
 ```
 {: .output}
 
 To exit out of the container:
 ```
-Apptainer> exit 
+Apptainer> exit
 ```
 {: .language-bash}
 
@@ -264,6 +264,27 @@ Note that this module loading process happens principally through the manipulati
 The module loading process manipulates other special environment variables as well, including variables that influence where the system looks for software libraries, and sometimes variables which tell commercial software packages where to find license servers.
 
 The module command also restores these shell environment variables to their previous state when a module is unloaded.
+
+## Containers: Docker vs Singularity/Apptainer
+
+Containers are used for packaging software because they allow for reproducibility of research and reusability of code. Docker and Apptainer are two container technologies that are generally used by researchers but Apptainer is widely supported for scientific computing.
+Docker is often blocked on HPC clusters but Singularity/Apptainer isn't.
+
+The real reason comes to down to root privileges, which are the highest level of access on a Linux/Unix system. Both Docker and Singularity are designed to run on these systems.
+
+The Docker daemon (that powers Docker containers) inherently requires root privileges. This allows the Docker daemon to create, modify, and delete files anywhere on the host by mounting host directories into the container on your behalf. This makes Docker very helpful when running on your local machine or on a virtual machine on the cloud where root privileges are allowed.
+
+On HPC's, which are shared environments, users generally do not have root privileges. Rather, each user typically has a home directory with read-write privileges, a temporary scratch directory, and may have access to project directories (e.g., accessible by all users of a lab). You may have read access to system-wide directories, but having write-access would allow someone to have the ability to make system-wide changes (that's bad).
+
+At this point, it's probably becoming clear why HPC administrators block Docker - the inherent root privileges of the Docker daemon are a security concern on a shared environment. It would allow the Docker container to write anywhere, potentially compromising the system or other users' data.
+
+Singularity (aka Apptainer) was designed for shared environment HPCs. It is 'HPC-friendly' because it maps your user ID (and therefore your privileges) to the container you're running. For this reason, you cannot access directories while running a process inside a container that you wouldn't be able to as a user. A direct consequence of Singularity's non-root, user-mapped design, is that apart from your home directory (which is automatically mounted inside your container), you must explicitly bind other directories that you'd like to access inside of the container (such as your scratch or a project directory). If you attempt to bind a directory outside of your permissions, it will fail.
+
+Thankfully, you can directly run Docker images with Singularity. When you run 'singularity pull docker://ubuntu:22.04', Singularity downloads the relevant Docker image layers and metadata from DockerHub and converts it in Singularity Image Format (SIF). Singularity can then use this SIF file to build and run a Singularity container.
+
+{% include figure.html max-width="75%" caption=""
+   file="/fig/docker_vs_apptainer.jpeg"
+   alt="Comparing Docker and Apptainer" %}
 
 ## Directly Installing Software
 
@@ -284,7 +305,7 @@ $ pwd
 {: .language-bash}
 
 Now copy the output from the pwd command and export it to your path. To add it to your path just for this session.
- 
+
 ```
 $ export PATH=$PATH:/data/hps/assoc/private/intro_to_sci_comp/user/$USER/bin/sratoolkit.3.2.0-centos_linux64/bin/
 ```
@@ -399,7 +420,7 @@ $ ./configure --help
 Notice in the output the following lines:
 ```
 ...
- 
+
                         disable compiler optimizations that would produce
                           unportable binaries
   --disable-pic           compile PIC objects [default=enabled for shared
@@ -430,7 +451,7 @@ Use these variables to override the choices made by `configure' or to help
 it to find libraries and programs with nonstandard names/locations.
 
 Report bugs to <eddys@janelia.hhmi.org>.
- 
+
 ...
 ```
 {: .output}
