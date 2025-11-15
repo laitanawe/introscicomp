@@ -50,18 +50,18 @@ submission_.
 
 In this case, the job we want to run is a shell script -- essentially a text file containing a list of UNIX commands to be executed in a sequential manner. Our shell script will have three parts:
 
-* On the very first line, add `{{ site.remote.bash_shebang }}`. The `#!` (pronounced "hash-bang" or "shebang") tells the computer what program is meant to process the contents of this file. In this case, we are telling it
+* On the very first line, add `#!/usr/bin/env bash`. The `#!` (pronounced "hash-bang" or "shebang") tells the computer what program is meant to process the contents of this file. In this case, we are telling it
   that the commands that follow are written for the command-line shell (what we've been doing everything in so far).
 * Anywhere below the first line, we'll add an `echo` command with a friendly greeting. When run, the shell script will print whatever comes after `echo` in the terminal.
   * `echo -n` will print everything that follows, _without_ ending the line by printing the new-line character.
 * On the last line, we'll invoke the `hostname` command, which will print the name of the machine the script is run on.
 
 ```
-{{ site.remote.prompt }} nano example-job.sh
+[yourUsername@login1 ~]$ nano example-job.sh
 ```
 {: .language-bash}
 ```
-{{ site.remote.bash_shebang }}
+#!/usr/bin/env bash
 
 echo -n "This script is running on "
 hostname
@@ -75,45 +75,49 @@ hostname
 > > ## Solution
 > >
 > > ```
-> > {{ site.remote.prompt }} bash example-job.sh
+> > [yourUsername@login1 ~]$ bash example-job.sh
 > > ```
 > > {: .language-bash}
 > > ```
-> > This script is running on {{ site.remote.host }}
+> > This script is running on login1
 > > ```
 > > {: .output}
 > {: .solution}
 {: .challenge}
 
-This script ran on the login node, but we want to take advantage of
-the compute nodes: we need the scheduler to queue up `example-job.sh`
-to run on a compute node.
+This script ran on the login node, but we want to take advantage of the compute nodes: we need the scheduler to queue up `example-job.sh` to run on a compute node.
 
-To submit this task to the scheduler, we use the
-`{{ site.sched.submit.name }}` command.
-This creates a _job_ which will run the _script_ when _dispatched_ to
-a compute node which the queuing system has identified as being
-available to perform the work.
+To submit this task to the scheduler, we use the `sbatch` command.
+This creates a _job_ which will run the _script_ when _dispatched_ to a compute node which the queuing system has identified as being available to perform the work.
 
 ```
-{{ site.remote.prompt }} {{ site.sched.submit.name }} {% if site.sched.submit.options != '' %}{{ site.sched.submit.options }} {% endif %}example-job.sh
+[yourUsername@login1 ~]$ sbatch example-job.sh
 ```
 {: .language-bash}
 
-{% include {{ site.snippets }}/scheduler/basic-job-script.snip %}
+```
+Submitted batch job 7
+```
+{: .output}
 
 And that's all we need to do to submit a job. Our work is done -- now the
 scheduler takes over and tries to run the job for us. While the job is waiting
 to run, it goes into a list of jobs called the _queue_. To check on our job's
 status, we check the queue using the command
-`{{ site.sched.status }} {{ site.sched.flag.user }}`.
+`squeue -u yourUsername`.
 
 ```
-{{ site.remote.prompt }} {{ site.sched.status }} {{ site.sched.flag.user }}
+[yourUsername@login1 ~]$ squeue -u yourUsername
 ```
 {: .language-bash}
 
-{% include {{ site.snippets }}/scheduler/basic-job-status.snip %}
+```
+JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+    9 cpubase_b example-   user01  R       0:05      1 node1
+```
+{: .output}
+
+We can see all the details of our job, most importantly that it is in the `R` or `RUNNING` state. Sometimes our jobs might need to wait in a queue (`PENDING`) or have an error (`E`).
 
 > ## Where's the Output?
 >
