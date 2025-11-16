@@ -435,6 +435,15 @@ This job will use 2 CPUs.
 {: .output}
 Typically, the resulting shell environment will be the same as that for `sbatch`.
 
+## Interactive Jobs
+Sometimes, you will need a lot of resources for interactive use. Perhaps it’s our first time running an analysis or we are attempting to debug something that went wrong with a previous job. Fortunately, Slurm makes it easy to start an interactive job with `srun`:
+```
+[yourUsername@login1 ~]$ srun --pty bash
+```
+{: .language-bash}
+
+You should be presented with a bash prompt. Note that the prompt will likely change to reflect your new location, in this case the compute node we are logged on. You can also verify this with `hostname`.
+
 ## Running a Job on a Compute Node
 
 Create a submission file, requesting one task on a single node, then launch it.
@@ -596,5 +605,5 @@ From the job history, we see that `amdahl` jobs finished executing in at most a 
 > {: .solution}
 {: .challenge}
 
-
+[hisat]: https://daehwankimlab.github.io/hisat2/
 {% include links.md %}
