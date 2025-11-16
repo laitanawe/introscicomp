@@ -156,10 +156,10 @@ And that's all we need to do to submit a job. Our work is done -- now the
 scheduler takes over and tries to run the job for us. While the job is waiting
 to run, it goes into a list of jobs called the _queue_. To check on our job's
 status, we check the queue using the command
-`squeue -u yourUsername`.
+`squeue -u $USER`.
 
 ```
-[yourUsername@login1 ~]$ squeue -u yourUsername
+[yourUsername@login1 ~]$ squeue -u $USER
 ```
 {: .language-bash}
 
@@ -245,7 +245,23 @@ with your site's default resources, which is probably not what you want.
 
 The following are several key resource requests:
 
+`--ntasks=<ntasks>` or `-n <ntasks>`: How many CPU cores does your job need, in total?
 
+`--time <days-hours:minutes:seconds>` or `-t <days-hours:minutes:seconds>`: How much real-world time (walltime) will your job take to run? The <days> part can be omitted.
+
+`--mem=<megabytes>`: How much memory on a node does your job need in megabytes? You can also specify gigabytes using by adding a little “g” afterwards (example: `--mem=5g`)
+
+`--nodes=<nnodes>` or `-N <nnodes>`: How many separate machines does your job need to run on? Note that if you set `ntasks` to a number greater than what one machine can offer, Slurm will set this value automatically.
+
+Note that just _requesting_ these resources does not make your job run faster, nor does it necessarily mean that you will consume all of these resources. It only means that these are made available to you. Your job may end up using less memory, or less time, or fewer nodes than you have requested, and it will still run.
+
+It's best if your requests accurately reflect your job's requirements. We'll talk more about how to make sure that you're using resources effectively in a later episode of this lesson.
+
+> ## Submitting Resource Requests
+>
+> Modify our `hostname` script so that it runs for a minute, then submit a job for it on the cluster.
+>
+> 
 
 
 
