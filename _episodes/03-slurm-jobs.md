@@ -343,7 +343,7 @@ will be their own.
 
 ## Cancelling a Job
 
-Sometimes we'll make a mistake and need to cancel a job. This can be done with the `{{ site.sched.del }}` command. Let's submit a job and then cancel it using its job number (remember to change the walltime so that it runs long enough for you to cancel it before it is killed!).
+Sometimes we'll make a mistake and need to cancel a job. This can be done with the `scancel` command. Let's submit a job and then cancel it using its job number (remember to change the walltime so that it runs long enough for you to cancel it before it is killed!).
 
 ```
 [yourUsername@login1 ~]$ sbatch example-job.sh
