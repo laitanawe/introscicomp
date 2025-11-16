@@ -341,6 +341,79 @@ jobs on the node will be unaffected. This means that one user cannot mess up
 the experience of others, the only jobs affected by a mistake in scheduling
 will be their own.
 
+## Cancelling a Job
+
+Sometimes we'll make a mistake and need to cancel a job. This can be done with the `{{ site.sched.del }}` command. Let's submit a job and then cancel it using its job number (remember to change the walltime so that it runs long enough for you to cancel it before it is killed!).
+
+```
+[yourUsername@login1 ~]$ sbatch example-job.sh
+[yourUsername@login1 ~]$ squeue -u $USER
+```
+{: .language-bash}
+
+```
+Submitted batch job 13
+
+JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+   13 cpubase_b long_job   user01  R       0:02      1 node1
+```
+{: .output}
+
+Now cancel the job with its job number (printed in your terminal). A clean
+return of your command prompt indicates that the request to cancel the job was
+successful.
+
+```
+[yourUsername@login1 ~]$ scancel 38759
+# It might take a minute for the job to disappear from the queue...
+[yourUsername@login1 ~]$ squeue -u yourUsername
+```
+{: .language-bash}
+
+```
+JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+```
+{: .output}
+
+> ## Cancelling multiple jobs
+>
+> We can also cancel all of our jobs at once using the `-u` option. This will delete all jobs for a specific user (in this case, yourself). Note that you can only delete your own jobs. Try submitting multiple jobs and then cancelling them all.
+>
+> 
+>
+> > ## Solution
+> > First, submit a trio of jobs:
+> > ```
+> > [yourUsername@login1 ~]$ sbatch example-job.sh
+> > [yourUsername@login1 ~]$ sbatch example-job.sh
+> > [yourUsername@login1 ~]$ sbatch example-job.sh
+> > ```
+> > {: .language-bash}
+> > 
+> > Then, cancel them all:
+> > ```
+> > [yourUsername@login1 ~]$ scancel -u yourUsername
+> > ```
+> > {: .language-bash}
+> >
+> {: .solution}
+{: .challenge}
+
+## Other Types of Jobs
+
+Up to this point, we've focused on running jobs in batch mode.
+Slurm also provides the ability to start an interactive session.
+
+There are very frequently tasks that need to be done interactively. Creating an
+entire job script might be overkill, but the amount of resources required is
+too much for a login node to handle. A good example of this might be building a
+genome index for alignment with a tool like [HISAT2][hisat]. Fortunately, we
+can run these types of tasks as a one-off with `srun`.
+
+`srun` runs a single command on the cluster and then exits. Let’s demonstrate this by running the `hostname` command with `srun`. (We can cancel an srun job with `Ctrl-c`.)
+
+
+
 
 ## Running a Job on a Compute Node
 
