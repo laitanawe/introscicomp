@@ -412,8 +412,28 @@ can run these types of tasks as a one-off with `srun`.
 
 `srun` runs a single command on the cluster and then exits. Let’s demonstrate this by running the `hostname` command with `srun`. (We can cancel an srun job with `Ctrl-c`.)
 
+```
+[yourUsername@login1 ~]$ srun hostname
+```
+{: .language-bash}
 
+```
+node1
+```
+{: .output}
 
+`srun` accepts all of the same options as `sbatch`. However, instead of specifying these in a script, these options are specified on the command-line when starting a job. To submit a job that uses 2 CPUs for instance, we could use the following command:
+```
+[yourUsername@login1 ~]$ srun -n 2 echo "This job will use 2 CPUs."
+```
+{: .language-bash}
+
+```
+This job will use 2 CPUs.
+This job will use 2 CPUs.
+```
+{: .output}
+Typically, the resulting shell environment will be the same as that for `sbatch`.
 
 ## Running a Job on a Compute Node
 
