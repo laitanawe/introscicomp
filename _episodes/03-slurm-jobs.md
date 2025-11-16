@@ -262,7 +262,84 @@ It's best if your requests accurately reflect your job's requirements. We'll tal
 > Modify our `hostname` script so that it runs for a minute, then submit a job for it on the cluster.
 >
 > 
+>
+> > ## Solution
+> >
+> > ```
+> > [yourUsername@login1 ~]$ cat example-job.sh
+> > ```
+> > {: .language-bash}
+> >
+> > ```
+> > #!/usr/bin/env bash
+> > #SBATCH -t 00:01 # timeout in HH:MM
+> >
+> > echo -n "This script is running on "
+> > sleep 20 # time in seconds
+> > hostname
+> > ```
+> > {: .output}
+> >
+> > ```
+> > [yourUsername@login1 ~]$ cat example-job.sh
+> > ```
+> > {: .language-bash}
+> >
+> > Why are the Slurm runtime and `sleep` time not identical?
+> {: .solution}
+{: .challenge}
 
+Resource requests are typically binding. If you exceed them, your job will be
+killed. Let's use wall time as an example. We will request 1 minute of
+wall time, and attempt to run a job for two minutes.
+
+```
+[yourUsername@login1 ~]$ cat example-job.sh
+```
+{: .language-bash}
+
+```
+#!/usr/bin/env bash
+#SBATCH -J long_job
+#SBATCH -t 00:01 # timeout in HH:MM
+
+echo "This script is running on ... "
+sleep 240 # time in seconds
+hostname
+```
+{: .output}
+
+Submit the job and wait for it to finish. Once it is has finished, check the
+log file.
+
+```
+[yourUsername@login1 ~]$ sbatch example-job.sh
+[yourUsername@login1 ~]$ squeue -u yourUsername
+```
+{: .language-bash}
+
+```
+[yourUsername@login1 ~]$ cat slurm-12.out
+```
+{: .language-bash}
+
+```
+This script is running on ...
+slurmstepd: error: *** JOB 12 ON node1 CANCELLED AT 2021-02-19T13:55:57
+DUE TO TIME LIMIT ***
+```
+{: .output}
+
+Our job was killed for exceeding the amount of resources it requested. Although
+this appears harsh, this is actually a feature. Strict adherence to resource
+requests allows the scheduler to find the best possible place for your jobs.
+Even more importantly, it ensures that another user cannot use more resources
+than they've been given. If another user messes up and accidentally attempts to
+use all of the cores or memory on a node, {{ site.sched.name }} will either
+restrain their job to the requested resources or kill the job outright. Other
+jobs on the node will be unaffected. This means that one user cannot mess up
+the experience of others, the only jobs affected by a mistake in scheduling
+will be their own.
 
 
 ## Running a Job on a Compute Node
