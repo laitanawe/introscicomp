@@ -314,7 +314,7 @@ log file.
 
 ```
 [yourUsername@login1 ~]$ sbatch example-job.sh
-[yourUsername@login1 ~]$ squeue -u yourUsername
+[yourUsername@login1 ~]$ squeue -u $USER
 ```
 {: .language-bash}
 
@@ -366,7 +366,7 @@ successful.
 ```
 [yourUsername@login1 ~]$ scancel 38759
 # It might take a minute for the job to disappear from the queue...
-[yourUsername@login1 ~]$ squeue -u yourUsername
+[yourUsername@login1 ~]$ squeue -u $USER
 ```
 {: .language-bash}
 
@@ -392,7 +392,7 @@ JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 > > 
 > > Then, cancel them all:
 > > ```
-> > [yourUsername@login1 ~]$ scancel -u yourUsername
+> > [yourUsername@login1 ~]$ scancel -u $USER
 > > ```
 > > {: .language-bash}
 > >
