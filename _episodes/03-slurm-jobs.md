@@ -43,6 +43,58 @@ The following illustration compares these tasks of a job scheduler to a waiter i
    
 The scheduler used in this lesson is SLURM. Although SLURM is not used everywhere, running jobs is quite similar regardless of what software is being used. The exact syntax might change, but the concepts remain the same.
 
+One of the major differences between using remote HPC resources and your own system (e.g. your laptop) is that remote resources are shared. How many users the resource is shared between at any one time varies from system to system, but it is unlikely you will ever be the only user logged into or using such a system.
+
+The widespread usage of scheduling systems where users submit jobs on HPC resources is a natural outcome of the shared nature of these resources. There are other things you, as an upstanding member of the community, need to consider.
+
+## Be Kind to the Login Nodes
+
+The login node is often busy managing all of the logged in users, creating and editing files and compiling software. If the machine runs out of memory or processing capacity, it will become very slow and unusable for everyone. While the machine is meant to be used, be sure to do so responsibly -- in ways that will not adversely impact other users' experience.
+
+Login nodes are always the right place to launch jobs. Cluster policies vary, but they may also be used for proving out workflows, and in some cases, may host advanced cluster-specific debugging or development tools. The cluster may have modules that need to be loaded, possibly in a certain order, and paths or library versions that differ from your laptop, and doing an interactive test run on the head node is a quick and reliable way to discover and fix these issues.
+
+> ## Login Nodes Are a Shared Resource
+>
+> Remember, the login node is shared with all other users and your actions
+> could cause issues for other people. Think carefully about the potential
+> implications of issuing commands that may use large amounts of resource.
+>
+> Unsure? Ask your friendly systems administrator ("sysadmin") if the thing
+> you're contemplating is suitable for the login node, or if there's another
+> mechanism to get it done safely.
+{: .callout}
+
+You can always use the commands `top` and `ps ux` to list the processes that are running on the login node along with the amount of CPU and memory they are using. If this check reveals that the login node is somewhat idle, you can safely use it for your non-routine processing task. If something goes wrong -- the process takes too long, or doesn't respond -- you can use the `kill` command along with the _PID_ to terminate the process.
+
+> ## Login Node Etiquette
+>
+> Which of these commands would be a routine task to run on the login node?
+>
+> 1. `python physics_sim.py`
+> 2. `make`
+> 3. `create_directories.sh`
+> 4. `molecular_dynamics_2`
+> 5. `tar -xzf R-3.3.0.tar.gz`
+>
+> > ## Solution
+> >
+> > Building software, creating directories, and unpacking software are common
+> > and acceptable > tasks for the login node: options #2 (`make`), #3
+> > (`mkdir`), and #5 (`tar`) are probably OK. Note that script names do not
+> > always reflect their contents: before launching #3, please
+> > `less create_directories.sh` and make sure it's not a Trojan horse.
+> >
+> > Running resource-intensive applications is frowned upon. Unless you are
+> > sure it will not affect other users, do not run jobs like #1 (`python`)
+> > or #4 (custom MD code). If you're unsure, ask your friendly sysadmin for
+> > advice.
+> {: .solution}
+{: .challenge}
+
+If you experience performance issues with a login node you should report it to the system staff (usually via the helpdesk) for them to investigate.
+
+Some SLURM commands can be seen on this page.
+
 ## Running a Batch Job
 
 The most basic use of the scheduler is to run a command non-interactively. Any command (or series of commands) that you want to run on the cluster is called a _job_, and the process of using a scheduler to run the job is called _batch job
@@ -120,59 +172,82 @@ JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 We can see all the details of our job, most importantly that it is in the `R` or `RUNNING` state. Sometimes our jobs might need to wait in a queue (`PENDING`) or have an error (`E`).
 
 
-
-
-One of the major differences between using remote HPC resources and your own system (e.g. your laptop) is that remote resources are shared. How many users the resource is shared between at any one time varies from system to system, but it is unlikely you will ever be the only user logged into or using such a system.
-
-The widespread usage of scheduling systems where users submit jobs on HPC resources is a natural outcome of the shared nature of these resources. There are other things you, as an upstanding member of the community, need to consider.
-
-## Be Kind to the Login Nodes
-
-The login node is often busy managing all of the logged in users, creating and editing files and compiling software. If the machine runs out of memory or processing capacity, it will become very slow and unusable for everyone. While the machine is meant to be used, be sure to do so responsibly -- in ways that will not adversely impact other users' experience.
-
-Login nodes are always the right place to launch jobs. Cluster policies vary, but they may also be used for proving out workflows, and in some cases, may host advanced cluster-specific debugging or development tools. The cluster may have modules that need to be loaded, possibly in a certain order, and paths or library versions that differ from your laptop, and doing an interactive test run on the head node is a quick and reliable way to discover and fix these issues.
-
-> ## Login Nodes Are a Shared Resource
+> ## Where's the Output?
 >
-> Remember, the login node is shared with all other users and your actions
-> could cause issues for other people. Think carefully about the potential
-> implications of issuing commands that may use large amounts of resource.
+> On the login node, this script printed output to the terminal -- but
+> now, when `squeue` shows the job has finished,
+> nothing was printed to the terminal.
 >
-> Unsure? Ask your friendly systems administrator ("sysadmin") if the thing
-> you're contemplating is suitable for the login node, or if there's another
-> mechanism to get it done safely.
-{: .callout}
+> Cluster job output is typically redirected to a file in the directory you
+> launched it from. Use `ls` to find and `cat` to read the file.
+{: .discussion}
 
-You can always use the commands `top` and `ps ux` to list the processes that are running on the login node along with the amount of CPU and memory they are using. If this check reveals that the login node is somewhat idle, you can safely use it for your non-routine processing task. If something goes wrong -- the process takes too long, or doesn't respond -- you can use the `kill` command along with the _PID_ to terminate the process.
+## Customising a Job
 
-> ## Login Node Etiquette
->
-> Which of these commands would be a routine task to run on the login node?
->
-> 1. `python physics_sim.py`
-> 2. `make`
-> 3. `create_directories.sh`
-> 4. `molecular_dynamics_2`
-> 5. `tar -xzf R-3.3.0.tar.gz`
->
-> > ## Solution
-> >
-> > Building software, creating directories, and unpacking software are common
-> > and acceptable > tasks for the login node: options #2 (`make`), #3
-> > (`mkdir`), and #5 (`tar`) are probably OK. Note that script names do not
-> > always reflect their contents: before launching #3, please
-> > `less create_directories.sh` and make sure it's not a Trojan horse.
-> >
-> > Running resource-intensive applications is frowned upon. Unless you are
-> > sure it will not affect other users, do not run jobs like #1 (`python`)
-> > or #4 (custom MD code). If you're unsure, ask your friendly sysadmin for
-> > advice.
-> {: .solution}
-{: .challenge}
+The job we just ran used all of the scheduler's default options. In a
+real-world scenario, that's probably not what we want. The default options
+represent a reasonable minimum. Chances are, we will need more cores, more
+memory, more time, among other special considerations. To get access to these
+resources we must customize our job script.
 
-If you experience performance issues with a login node you should report it to the system staff (usually via the helpdesk) for them to investigate.
+Comments in UNIX shell scripts (denoted by `#`) are typically ignored, but
+there are exceptions. For instance the special `#!` comment at the beginning of
+scripts specifies what program should be used to run it (you'll typically see
+`#!/usr/bin/env bash`). Schedulers like {{ site.sched.name }} also
+have a special comment used to denote special scheduler-specific options.
+Though these comments differ from scheduler to scheduler,
+Slurm's special comment is `SBATCH`. Anything
+following the `SBATCH` comment is interpreted as an
+instruction to the scheduler.
 
-Some SLURM commands can be seen on this page:
+Let's illustrate this by example. By default, a job's name is the name of the
+script, but the `-J` option can be used to change the
+name of a job. Add an option to the script:
+
+```
+[yourUsername@login1 ~]$ cat example-job.sh
+```
+{: .language-bash}
+
+```
+#!/usr/bin/env bash
+SBATCH -J hello-world
+
+echo -n "This script is running on "
+hostname
+```
+{: .output}
+
+Submit the job and monitor its status:
+
+```
+[yourUsername@login1 ~]$ sbatch example-job.sh
+squeue -u $USER
+```
+{: .language-bash}
+
+```
+JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+    9 cpubase_b example-   user01  R       0:05      1 node1
+```
+{: .output}
+
+Fantastic, we've successfully changed the name of our job!
+
+### Resource Requests
+
+What about more important changes, such as the number of cores and memory for
+our jobs? One thing that is absolutely critical when working on an HPC system
+is specifying the resources required to run a job. This allows the scheduler to
+find the right time and place to schedule our job. If you do not specify
+requirements (such as the amount of time you need), you will likely be stuck
+with your site's default resources, which is probably not what you want.
+
+The following are several key resource requests:
+
+
+
+
 
 ## Running a Job on a Compute Node
 
