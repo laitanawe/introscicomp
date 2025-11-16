@@ -291,7 +291,7 @@ It's best if your requests accurately reflect your job's requirements. We'll tal
 
 Resource requests are typically binding. If you exceed them, your job will be
 killed. Let's use wall time as an example. We will request 1 minute of
-wall time, and attempt to run a job for two minutes.
+wall time, and attempt to run a job for four minutes.
 
 ```
 [yourUsername@login1 ~]$ cat example-job.sh
