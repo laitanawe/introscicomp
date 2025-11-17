@@ -422,6 +422,42 @@ jobs on the node will be unaffected. This means that one user cannot mess up
 the experience of others, the only jobs affected by a mistake in scheduling
 will be their own.
 
+> ## Out of Time Jobs
+>
+> Run the script. Does it execute completely on the cluster or it just got killed?
+>
+> > ## Solution
+> >
+> > ```
+> > [yourUsername@login1 ~]$ nano example-job.sh
+> > ```
+> > {: .language-bash}
+> > ```
+> > #!/usr/bin/env bash
+> > #SBATCH --job-name="my_job1"
+> > #SBATCH --nodes=1
+> > #SBATCH --ntasks-per-node=1
+> > #SBATCH --time=0-00:01:00
+> > #SBATCH --mem=1gb
+> > #SBATCH --output="slurm-example-%j.o"
+> > #SBATCH --error="slurm-example-%j.e"
+> > #SBATCH --mail-user=youremail@seattlechildrens.org
+> > #SBATCH --mail-type=BEGIN,END,FAIL,REQUEUE,ALL
+> > #SBATCH --partition=cpu-test
+> > #SBATCH --account=core
+> > 
+> > file=$1
+> > 
+> > cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/Desktop
+> > echo "start"
+> > echo the file being processed is $file
+> > sleep 30
+> > echo "end"
+> > ```
+> > {: .output}
+> {: .solution}
+{: .challenge}
+
 ## Cancelling a Job
 
 Sometimes we'll make a mistake and need to cancel a job. This can be done with the `scancel` command. Let's submit a job and then cancel it using its job number (remember to change the walltime so that it runs long enough for you to cancel it before it is killed!).
