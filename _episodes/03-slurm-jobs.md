@@ -234,6 +234,86 @@ JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 
 Fantastic, we've successfully changed the name of our job!
 
+```
+[yourUsername@login1 ~]$ nano example-fastq.sh
+```
+{: .language-bash}
+
+```
+#!/usr/bin/env bash
+#SBATCH --job-name="my_job1"
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=0-00:05:00
+#SBATCH --mem=1gb
+#SBATCH --output="slurm-example-%j.o"
+#SBATCH --error="slurm-example-%j.e"
+#SBATCH --mail-user=youremail@seattlechildrens.org
+#SBATCH --mail-type=BEGIN,END,FAIL,REQUEUE,ALL
+#SBATCH --partition=cpu-test
+#SBATCH --account=core
+
+file=$1
+
+cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/Desktop
+
+echo "start"
+
+echo the file being processed is $file
+sleep 30
+
+echo "end"
+```
+{: .output}
+
+
+```
+[yourUsername@login1 ~]$ sbatch example-fastq.sh
+squeue -u $USER
+```
+{: .language-bash}
+
+```
+Submitted batch job 4625957
+```
+{: .output}
+
+```
+[yourUsername@login1 ~]$ sbatch example-fastq.sh
+squeue -u $USER
+```
+{: .language-bash}
+
+```
+ JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           4625958  cpu-test oawe_job     oawe  R       0:01      1 cpu-33
+```
+{: .output}
+
+```
+[yourUsername@login1 ~]$ ls -Ah
+```
+{: .language-bash}
+
+```
+example1.sbatch  orig_example1.sbatch     slurm-example-4625955.o  slurm-example-4625958.e
+files            shell-lesson-data        slurm-example-4625957.e  slurm-example-4625958.o
+jobsdir          slurm-example-4625955.e  slurm-example-4625957.o
+```
+{: .output}
+
+```
+[yourUsername@login1 ~]$ cat slurm-example-4625958.o
+```
+{: .language-bash}
+
+```
+start
+the file being processed is
+end
+```
+{: .output}
+
 ### Resource Requests
 
 What about more important changes, such as the number of cores and memory for
@@ -241,7 +321,8 @@ our jobs? One thing that is absolutely critical when working on an HPC system
 is specifying the resources required to run a job. This allows the scheduler to
 find the right time and place to schedule our job. If you do not specify
 requirements (such as the amount of time you need), you will likely be stuck
-with your site's default resources, which is probably not what you want.
+with your site's default resources, which is proba
+bly not what you want.
 
 The following are several key resource requests:
 
