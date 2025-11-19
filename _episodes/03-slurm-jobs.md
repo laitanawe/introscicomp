@@ -581,6 +581,12 @@ sbatch --partition=cpu-core --account=intro_to_sci_comp --mail-user=yourusername
 ```
 {: .language-bash}
 
+The easiest way to list accounts and partitions available to you is through this command:
+```
+sshare -o "Account%40,Partition%40"
+```
+{: .language-bash}
+
 ### Resource Requests
 
 What about more important changes, such as the number of cores and memory for
