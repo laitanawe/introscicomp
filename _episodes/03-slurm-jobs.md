@@ -878,24 +878,87 @@ srun - Obtain a job allocation (as needed) and execute an application.
 We've learned how to load and unload software packages. This is very useful. However, we have not yet addressed the issue of software versioning. At some point or other, you will run into issues where only one particular version of some software will be suitable. Perhaps a key bugfix only happened in a certain version, or version X broke compatibility with a file format you use.
 In either of these example cases, it helps to be very specific about what software is loaded.
 
-Let's examine the output of `module avail` more closely.
+Let's examine the usage of `module load` more closely. Save this script as fastqc.slurm
 
-<table class="table table-striped">
-<tr><th>slurm option</th> <th>meaning</th><th></th><th></th></tr>
-<tr><th></th> <td></td> <td></td><td></td></tr>
-<tr><th></th> <td>File in which to store job output.</td> <td></td><td></td></tr>
-<tr><th></th> <td>Partition/queue in which to run the job.</td> <td></td><td></td></tr>
-<tr><th></th> <td>Quality Of Service.</td> <td></td><td></td></tr>
-<tr><th></th> <td>Signal job when approaching time limit.</td> <td></td><td></td></tr>
-<tr><th></th> <td>Wall clock time limit.</td> <td></td><td></td></tr>
-<tr><th></th> <td>Wrap specified command in a simple "sh" shell. (sbatch command only)</td> <td></td><td></td></tr>
-</table>
+```
+#!/usr/bin/env bash
+#SBATCH --job-name="fastqc_job1"
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=0-01:00:00
+#SBATCH --mem=1gb
+#SBATCH --output="fastqc-slurm-example-%j.o"
+#SBATCH --error="fastqc-slurm-example-%j.e"
+#SBATCH --mail-user=youremail@seattlechildrens.org
+#SBATCH --mail-type=BEGIN,END,FAIL,REQUEUE,ALL
+#SBATCH --partition=cpu-core
+#SBATCH --account=intro_to_sci_comp
 
-<table class="table table-striped">
-<tr><th>slurm option</th> <th>meaning</th><th></th><th></th></tr>
-<tr><th></th> <td></td><td></td><td></td></tr>
-<tr><th></th> <td></td><td></td><td></td></tr>
-</table>
+file=$1
+
+module load bioinformatics
+module load fastqc
+
+cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/Desktop
+
+echo "start"
+
+mkdir fqcreports
+
+echo the file being processed is $file
+apptainer exec --bind /data/hps/assoc /data/hps/assoc/public/bioinformatics/container/cliSeqTools/BioinformaticsCliTools.sif fastqc -o fqcreports $file
+echo fastqc completed for $file
+#sleep 130
+
+echo "end"
+```
+{: .language-bash}
+
+```
+Submitted batch job 4671439
+```
+{: .output}
+
+Save this as cellranger.slurm
+```
+#!/usr/bin/env bash
+#SBATCH --job-name="myjob_cellranger_job1"
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=0-01:00:00
+#SBATCH --mem=1gb
+#SBATCH --output="slurm-cellranger-%j.o"
+#SBATCH --error="slurm-cellranger-%j.e"
+#SBATCH --mail-user=youremail@seattlechildrens.org
+#SBATCH --mail-type=BEGIN,END,FAIL,REQUEUE,ALL
+#SBATCH --partition=cpu-core
+#SBATCH --account=intro_to_sci_comp
+
+begintime=$(date +'%d-%b-%Y %H:%M:%S')
+
+module load cellranger
+
+cellranger testrun --id=tiny
+
+cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/Desktop
+
+echo "start at "${begintime}
+
+endtime=$(date +'%d-%b-%Y %H:%M:%S')
+
+echo "end at "${endtime}
+```
+{: .language-bash}
+
+```
+sbatch cellranger1.slurm
+```
+{: .language-bash}
+
+```
+Submitted batch job 4671450
+```
+{: .output}
 
 We've touched on all the skills you need to interact with an HPC cluster:
 logging in over SSH, loading software modules, submitting jobs, and finding the output. Let's learn about estimating resource usage and why it might matter.
@@ -917,7 +980,7 @@ if you ask for too much, your job may not run even though enough resources are a
 
 ## Stats
 
-Since we already submitted `amdahl` to run on the cluster, we can query the scheduler to see how long our job took and what resources were used. We will use `sacct -u $USER` to get statistics about `job.sh`.
+Since we already submitted our job to run on the cluster, we can query the scheduler to see how long our job took and what resources were used. We will use `sacct -u $USER` to get statistics about `job.sh`.
 
 ```
 sacct -u $USER
@@ -989,7 +1052,7 @@ ext+ (extern): This step accounts for any resource usage that occurs outside of 
 You can view the full names by adjusting the output format with the `--format` option, for example, sacct `--format=JobID%30,JobName%30` to widen the JobID and JobName fields.
 
 ```
-sacct -u $USER -l -j 347087
+[yourUsername@login1 ~]$ sacct -u $USER -l -j 4671331
 ```
 {: .language-bash}
 
@@ -999,9 +1062,35 @@ information to `less` to make it easier to view (use the left and right arrow
 keys to scroll through fields).
 
 ```
-{{ site.remote.prompt }} {{ site.sched.hist }} {{ site.sched.flag.histdetail }} 347087 | less -S
+[yourUsername@login1 ~]$ sacct -u $USER -l -j 4671331 | less -S
 ```
 {: .language-bash}
+
+```
+4671314
+4671316
+4671317
+4671318
+4671319
+4671320
+4671321
+4671322
+4671323
+4671324
+4671325
+4671326
+4671327
+4671328
+4671329
+4671330
+4671331
+```
+{: .language-bash}
+
+```
+[yourUsername@login1 ~]$ sacct -u $USER -l -j 4671331 | less -S
+```
+{: .output}
 
 > ## Discussion
 >
