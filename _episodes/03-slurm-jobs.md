@@ -866,7 +866,7 @@ This job will use 2 CPUs.
 {: .output}
 Typically, the resulting shell environment will be the same as that for `sbatch`.
 
-## Interactive Jobs
+## Interactive Jobs (srun)
 Sometimes, you will need a lot of resources for interactive use. Perhaps it’s our first time running an analysis or we are attempting to debug something that went wrong with a previous job. Fortunately, Slurm makes it easy to start an interactive job with `srun`:
 ```
 [yourUsername@login1 ~]$ srun --pty bash
@@ -874,6 +874,21 @@ Sometimes, you will need a lot of resources for interactive use. Perhaps it’s 
 {: .language-bash}
 
 You should be presented with a bash prompt. Note that the prompt will likely change to reflect your new location, in this case the compute node we are logged on. You can also verify this with `hostname`.
+
+`srun` runs interactively. It is used to execute a single command or launch a parallel program directly on a compute node.
+
+You can use srun to launch an interactive shell on a worker node.
+
+This is also great way to test a specific command or launch a smaller-scale task without needing a full shell session.
+
+The basic syntax for an interactive job to launch a bash shell using srun is as follows:
+
+```
+srun --partition=<partition_name> --account=<account_name> \
+  --nodes=1 --ntasks=1 --cpus-per-task=<cpus> --mem-per-cpu=<memory> \
+  --time=<D-HH:MM:SS> --pty /bin/bash
+```
+{: .language-bash}
 
 ## Running a Job on a Compute Node
 
