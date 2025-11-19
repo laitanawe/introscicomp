@@ -313,6 +313,38 @@ end
 ```
 {: .output}
 
+```
+#!/usr/bin/env bash
+#SBATCH --job-name="cellranger_job1"
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=0-01:00:00
+#SBATCH --mem=1gb
+#SBATCH --output="slurm-cellranger-%j.o"
+#SBATCH --error="slurm-cellranger-%j.e"
+#SBATCH --mail-user=youremail@seattlechildrens.org
+#SBATCH --mail-type=BEGIN,END,FAIL,REQUEUE,ALL
+#SBATCH --partition=cpu-core
+#SBATCH --account=intro_to_sci_comp
+
+echo "start" 
+cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/Desktop
+module load cellranger
+cellranger testrun --id=tiny
+
+echo the job is running
+sleep 30
+
+echo "end"
+```
+{: .output}
+
+```
+[yourUsername@login1 ~]$ sbatch cellranger1.slurm
+```
+{: .language-bash}
+
+
 ### Recommended syntax
 
 Generally, all SLURM directives can be embedded into a Slurm script. However, it is better for certain directives to be retained on the command line and not incorporated.
