@@ -669,7 +669,14 @@ log file.
 
 ```
 [yourUsername@login1 ~]$ sbatch example-job.sh
-[yourUsername@login1 ~]$ squeue -u $USER
+[yourUsername@login1 ~]$ watch squeue -u $USER
+```
+{: .language-bash}
+
+You can also watch the job status using the following command:
+```
+[yourUsername@login1 ~]$ sbatch example-job.sh
+[yourUsername@login1 ~]$ while true; do squeue -u $USER; sleep 2; echo; done
 ```
 {: .language-bash}
 
