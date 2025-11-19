@@ -266,7 +266,6 @@ echo "end"
 ```
 {: .output}
 
-
 ```
 [yourUsername@login1 ~]$ sbatch example-fastq.sh
 squeue -u $USER
@@ -313,6 +312,47 @@ the file being processed is
 end
 ```
 {: .output}
+
+### Recommended syntax
+
+Generally, all SLURM directives can be embedded into a Slurm script. However, it is better for certain directives to be retained on the command line and not incorporated.
+- --account and --partition are parameters that can often change depending on who is running it and are dangerous to run blindly.
+- Also --mail-user which specifies the email address will change depending on who the user is.
+- Any directive specified on the command line will supersede those embedded in the script.
+Here is what we recommend:
+```
+#!/usr/bin/env bash
+#SBATCH --job-name="my_job1"
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=0-00:05:00
+#SBATCH --mem=1gb
+#SBATCH --output="slurm-example-%j.o"
+#SBATCH --error="slurm-example-%j.e"
+#SBATCH --mail-type=BEGIN,END,FAIL,REQUEUE,ALL
+
+file=$1
+
+cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/Desktop
+
+echo "start"
+
+echo the file being processed is $file
+sleep 30
+
+echo "end"
+```
+{: .language-bash}
+
+```
+sbatch --partition=<partition_name> --account=<account_name> --mail-user=<email> <batch_script.sh>
+```
+{: .language-bash}
+
+```
+sbatch --partition=cpu-core --account=intro_to_sci_comp --mail-user=yourusername@seattlechildrens.org example-job.sh
+```
+{: .language-bash}
 
 ### Resource Requests
 
