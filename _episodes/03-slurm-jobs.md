@@ -33,7 +33,7 @@ keypoints:
 - HPC systems typically provide login nodes and a set of compute nodes.
 - The resources found on independent (worker) nodes can vary in volume and type (amount of RAM, processor architecture, availability of network mounted filesystems, etc.).
 - Files saved on shared storage are available on all nodes.
-- The login node is a shared machine: be considerate of other users.
+- The login node is a shared machine, be considerate of other users.
 - "The queuing system facilitates executing tasks"
 - "The scheduler handles how compute resources are shared between users."
 - "A job is just a shell script."
