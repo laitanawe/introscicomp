@@ -321,39 +321,7 @@ Generally, all SLURM directives can be embedded into a Slurm script. However, it
 - Any directive specified on the command line will supersede those embedded in the script.
 Here is what we recommend:
 
-```
-#!/usr/bin/env bash
-#SBATCH --job-name="my_job1"
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --time=0-00:05:00
-#SBATCH --mem=1gb
-#SBATCH --output="slurm-example-%j.o"
-#SBATCH --error="slurm-example-%j.e"
-#SBATCH --mail-type=BEGIN,END,FAIL,REQUEUE,ALL
 
-file=$1
-
-cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/Desktop
-
-echo "start"
-
-echo the file being processed is $file
-sleep 30
-
-echo "end"
-```
-{: .output}
-
-```
-sbatch --partition=<partition_name> --account=<account_name> --mail-user=<email> <batch_script.sh>
-```
-{: .language-bash}
-
-```
-sbatch --partition=cpu-core --account=intro_to_sci_comp --mail-user=yourusername@seattlechildrens.org example-job.sh
-```
-{: .language-bash}
 
 ### Resource Requests
 
