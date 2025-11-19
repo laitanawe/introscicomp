@@ -222,16 +222,7 @@ connect to a shared, remote fileserver or cluster of servers.
 > {: .solution}
 {: .challenge}
 
-> ## Explore a Worker Node
->
-> Finally, let’s look at the resources available on the worker nodes where your jobs will actually run. `sinfo -o` specifies the `output_format` (%c is the Number of CPUs per node, %n to List of node hostnames,%m is the Size of memory per node in megabytes). We will pipe the output of the `sinfo` command into the column command. The column utility formats its input into multiple columns. Try running this command to see the name, CPUs and memory available on the worker nodes:
->
-> > ## Solution
-> >
-> > ```
-> > [yourUsername@login1 ~]$ sinfo -o "%n %c %m" | column -t
-> > ```
-> > {: .language-bash}
+
 
 > ## Compare Your Computer, the Login Node and the Compute Node
 >
