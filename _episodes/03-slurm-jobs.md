@@ -320,6 +320,7 @@ Generally, all SLURM directives can be embedded into a Slurm script. However, it
 - Also `--mail-user` which specifies the email address will change depending on who the user is.
 - Any directive specified on the command line will supersede those embedded in the script.
 Here is what we recommend:
+
 ```
 #!/usr/bin/env bash
 #SBATCH --job-name="my_job1"
@@ -342,7 +343,7 @@ sleep 30
 
 echo "end"
 ```
-{: .language-bash}
+{: .output}
 
 ```
 sbatch --partition=<partition_name> --account=<account_name> --mail-user=<email> <batch_script.sh>
