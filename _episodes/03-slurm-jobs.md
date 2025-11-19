@@ -319,9 +319,18 @@ Generally, all SLURM directives can be embedded into a Slurm script. However, it
 - `--account` and `--partition` are parameters that can often change depending on who is running it and are dangerous to run blindly.
 - Also `--mail-user` which specifies the email address will change depending on who the user is.
 - Any directive specified on the command line will supersede those embedded in the script.
+Edit the script and remove lines with the following directives from it.
+
+`#SBATCH --mail-user=youremail@seattlechildrens.org`
+`#SBATCH --partition=cpu-test`
+`#SBATCH --account=core`
+
 Here is what we recommend:
 
-
+```
+sbatch --partition=<partition_name> --account=<account_name> --mail-user=<email> <batch_script.sh>
+```
+{: .language-bash}
 
 ```
 sbatch --partition=cpu-core --account=intro_to_sci_comp --mail-user=yourusername@seattlechildrens.org example-job.sh
