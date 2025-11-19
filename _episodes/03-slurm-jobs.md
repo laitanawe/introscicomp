@@ -321,11 +321,11 @@ Generally, all SLURM directives can be embedded into a Slurm script. However, it
 - Any directive specified on the command line will supersede those embedded in the script.
 Edit the script and remove lines with the following directives from it.
 
-`#SBATCH --mail-user=youremail@seattlechildrens.org`
-`#SBATCH --partition=cpu-test`
-`#SBATCH --account=core`
+- `#SBATCH --mail-user=youremail@seattlechildrens.org`
+- `#SBATCH --partition=cpu-test`
+- `#SBATCH --account=core`
 
-Here is what we recommend:
+Here is what is recommended:
 
 ```
 sbatch --partition=<partition_name> --account=<account_name> --mail-user=<email> <batch_script.sh>
