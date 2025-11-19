@@ -1141,6 +1141,12 @@ keys to scroll through fields).
 ```
 {: .language-bash}
 
+List of `jobids` for completed jobs.
+```
+[yourUsername@login1 ~]$ sacct --format=jobid%16,user,Partition,state%18,ExitCode,MaxRSS,NodeList%25,AllocTres%45,Start%20,End%20,CPUTime,TotalCPU,UserCPU,Elapsed%14,Timelimit%14 --units=G | awk '{print $1,$4}' | grep -i complete | cut -d ' ' -f 1
+```
+{: .language-bash}
+
 ```
 4671314
 4671316
@@ -1160,12 +1166,12 @@ keys to scroll through fields).
 4671330
 4671331
 ```
-{: .language-bash}
+{: .output}
 
 ```
 [yourUsername@login1 ~]$ sacct -u $USER -l -j 4671331 | less -S
 ```
-{: .output}
+{: .language-bash}
 
 > ## Discussion
 >
