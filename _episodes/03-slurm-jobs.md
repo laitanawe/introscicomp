@@ -99,6 +99,67 @@ lwei     pts/203      2025-11-17 14:01 (10.91.86.112)
 
 Ideally, this should not show only your user ID, since there are likely several other people (including fellow learners in the class) connected right now.
 
+The real work on a cluster gets done by the _compute_ (or _worker_) _nodes_.
+compute nodes come in many shapes and sizes, but generally are dedicated to long
+or hard tasks that require a lot of computational resources.
+
+All interaction with the compute nodes is handled by a specialized piece of
+software called a scheduler (the scheduler used in this lesson is called
+SLURM. We'll learn more about how to use the
+scheduler to submit jobs next, but for now, it can also tell us more
+information about the compute nodes.
+
+For example, we can view all of the compute nodes by running the command
+`sinfo`.
+
+```
+sinfo
+```
+{: .language-bash}
+
+```
+PARTITION                           AVAIL  TIMELIMIT  NODES  STATE NODELIST
+cpu-core-sponsored                     up 14-00:00:0      1 drain* cpu-29
+cpu-core-sponsored                     up 14-00:00:0      1   drng cpu-30
+cpu-core-sponsored                     up 14-00:00:0      5    mix cpu-[1,6-9]
+cpu-core-sponsored                     up 14-00:00:0      2  alloc cpu-[10-11]
+cpu-core-sponsored                     up 14-00:00:0     21   idle cpu-[2-5,12-28]
+cpu-core                               up 14-00:00:0      1 drain* cpu-29
+cpu-core                               up 14-00:00:0      1   drng cpu-30
+cpu-core                               up 14-00:00:0      5    mix cpu-[1,6-9]
+cpu-core                               up 14-00:00:0      2  alloc cpu-[10-11]
+cpu-core                               up 14-00:00:0     21   idle cpu-[2-5,12-28]
+gpu-core-sponsored                     up 14-00:00:0      2   drng gpu-[1-2]
+gpu-core-sponsored                     up 14-00:00:0      4   idle gpu-[3-6]
+gpu-core                               up 14-00:00:0      2   drng gpu-[1-2]
+gpu-core                               up 14-00:00:0      4   idle gpu-[3-6]
+cpu-posit_workbench_small-sponsored    up   12:00:00      1    mix posit-1
+cpu-posit_workbench_small-sponsored    up   12:00:00      2   idle cpu-[31-32]
+cpu-posit_workbench-sponsored          up   12:00:00      1    mix posit-1
+cpu-posit_workbench-sponsored          up   12:00:00      2   idle cpu-[31-32]
+cpu-pwb_small                          up   12:00:00      1    mix posit-1
+cpu-pwb_small                          up   12:00:00      2   idle cpu-[31-32]
+cpu-pwb                                up   12:00:00      1    mix posit-1
+cpu-pwb                                up   12:00:00      2   idle cpu-[31-32]
+gpu-posit_workbench-sponsored          up   12:00:00      1   idle gpu-7
+gpu-pwb                                up   12:00:00      1   idle gpu-7
+cpu-test-sponsored                     up      15:00      1   idle cpu-33
+cpu-test                               up      15:00      1   idle cpu-33
+gpu-test-sponsored                     up      15:00      1   idle gpu-7
+gpu-test                               up      15:00      1   idle gpu-7
+```
+{: .output}
+
+A lot of the nodes are busy running work for other users: we are not alone
+here!
+
+There are also specialized machines used for managing disk storage, user
+authentication, and other infrastructure-related tasks. Although we do not
+typically logon to or interact with these machines directly, they enable a
+number of key features like ensuring our user account and files are available
+throughout the HPC system.
+
+
 ## Be Kind to the Login Nodes
 
 The login node is often busy managing all of the logged in users, creating and editing files and compiling software. If the machine runs out of memory or processing capacity, it will become very slow and unusable for everyone. While the machine is meant to be used, be sure to do so responsibly -- in ways that will not adversely impact other users' experience.
