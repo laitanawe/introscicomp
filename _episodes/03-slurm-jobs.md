@@ -113,7 +113,7 @@ For example, we can view all of the compute nodes by running the command
 `sinfo`.
 
 ```
-sinfo
+[yourUsername@login1 ~]$ sinfo
 ```
 {: .language-bash}
 
@@ -174,7 +174,93 @@ connect to a shared, remote fileserver or cluster of servers.
 {% include figure.html url="" max-width="40%"
    file="/fig/node_anatomy.png"
    alt="Node anatomy" caption="" %}
-   
+
+> ## Explore the Login Node
+>
+> Now compare the resources of your computer with those of the login node.
+>
+> > ## Solution
+> >
+> > ```
+> > [yourUsername@login1 ~]$ nproc --all
+> > [yourUsername@login1 ~]$ free -m
+> > ```
+> > {: .language-bash}
+> >
+> > You can get more information about the processors using `lscpu`,
+> > and a lot of detail about the memory by reading the file `/proc/meminfo`:
+> >
+> > ```
+> > [yourUsername@login1 ~]$ less /proc/meminfo
+> > ```
+> > {: .language-bash}
+> >
+> > You can also explore the available filesystems using `df` to show **d**isk
+> > **f**ree space. The `-h` flag renders the sizes in a human-friendly format,
+> > i.e., GB instead of B. The **t**ype flag `-T` shows what kind of filesystem
+> > each resource is.
+> >
+> > ```
+> > [yourUsername@login1 ~]$ df -Th
+> > ```
+> > {: .language-bash}
+> >
+> > > ## Different results from `df`
+> > >
+> > > * The local filesystems (ext, tmp, xfs, zfs) will depend on whether
+> > >   you're on the same login node (or compute node, later on).
+> > > * Networked filesystems (beegfs, cifs, gpfs, nfs, pvfs) will be similar
+> > >   -- but may include {{ site.remote.user }}, depending on how it
+> > >   is [mounted][mount].
+> > {: .discussion}
+> >
+> > > ## Shared Filesystems
+> > >
+> > > This is an important point to remember: files saved on one node
+> > > (computer) are often available everywhere on the cluster!
+> > {: .callout}
+> {: .solution}
+{: .challenge}
+
+> ## Explore a Worker Node
+>
+> Finally, let’s look at the resources available on the worker nodes where your jobs will actually run. `sinfo -o` specifies the `output_format` (%c is the Number of CPUs per node, %n to List of node hostnames,%m is the Size of memory per node in megabytes). We will pipe the output of the `sinfo` command into the column command. The column utility formats its input into multiple columns. Try running this command to see the name, CPUs and memory available on the worker nodes:
+>
+> > ## Solution
+> >
+> > ```
+> > [yourUsername@login1 ~]$ sinfo -o "%n %c %m" | column -t
+> > ```
+> > {: .language-bash}
+
+> ## Compare Your Computer, the Login Node and the Compute Node
+>
+> Compare your laptop's number of processors and memory with the numbers you
+> see on the cluster login node and compute node. What implications do
+> you think the differences might have on running your research work on the
+> different systems and nodes?
+>
+> > ## Solution
+> >
+> > Compute nodes are usually built with processors that have _higher
+> > core-counts_ than the login node or personal computers in order to support
+> > highly parallel tasks. Compute nodes usually also have substantially _more
+> > memory (RAM)_ installed than a personal computer. More cores tends to help
+> > jobs that depend on some work that is easy to perform in _parallel_, and
+> > more, faster memory is key for large or _complex numerical tasks_.
+> {: .solution}
+{: .discussion}
+
+> ## Differences Between Nodes
+>
+> Many HPC clusters have a variety of nodes optimized for particular workloads.
+> Some nodes may have larger amount of memory, or specialized resources such as
+> Graphics Processing Units (GPUs or "video cards").
+{: .callout}
+
+With all of this in mind, we will now cover how to talk to the cluster's
+scheduler, and use it to start running our scripts and programs!
+
 ## Be Kind to the Login Nodes
 
 The login node is often busy managing all of the logged in users, creating and editing files and compiling software. If the machine runs out of memory or processing capacity, it will become very slow and unusable for everyone. While the machine is meant to be used, be sure to do so responsibly -- in ways that will not adversely impact other users' experience.
