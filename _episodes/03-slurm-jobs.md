@@ -159,6 +159,13 @@ typically logon to or interact with these machines directly, they enable a
 number of key features like ensuring our user account and files are available
 throughout the HPC system.
 
+## Explore a Worker Node
+Finally, let’s look at the resources available on the worker nodes where your jobs will actually run. `sinfo -o` specifies the `output_format` (%c is the Number of CPUs per node, %n to List of node hostnames,%m is the Size of memory per node in megabytes). We will pipe the output of the `sinfo` command into the column command. The column utility formats its input into multiple columns. Try running this command to see the name, CPUs and memory available on the worker nodes:
+```
+[yourUsername@login1 ~]$ sinfo -o "%n %c %m" | column -t
+```
+{: .language-bash}
+
 ## What's in a Node?
 
 All of the nodes in an HPC system have the same components as your own laptop
