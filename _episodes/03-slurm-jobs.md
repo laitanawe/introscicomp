@@ -316,8 +316,8 @@ end
 ### Recommended syntax
 
 Generally, all SLURM directives can be embedded into a Slurm script. However, it is better for certain directives to be retained on the command line and not incorporated.
-- --account and --partition are parameters that can often change depending on who is running it and are dangerous to run blindly.
-- Also --mail-user which specifies the email address will change depending on who the user is.
+- `--account` and `--partition` are parameters that can often change depending on who is running it and are dangerous to run blindly.
+- Also `--mail-user` which specifies the email address will change depending on who the user is.
 - Any directive specified on the command line will supersede those embedded in the script.
 Here is what we recommend:
 ```
