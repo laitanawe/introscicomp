@@ -925,22 +925,68 @@ sacct -u $USER
 {: .language-bash}
 
 ```
-       JobID    JobName  Partition    Account  AllocCPUS      State ExitCode
------------- ---------- ---------- ---------- ---------- ---------- --------
-7               file.sh cpubase_b+ def-spons+          1  COMPLETED      0:0
-7.batch           batch            def-spons+          1  COMPLETED      0:0
-7.extern         extern            def-spons+          1  COMPLETED      0:0
-8               file.sh cpubase_b+ def-spons+          1  COMPLETED      0:0
-8.batch           batch            def-spons+          1  COMPLETED      0:0
-8.extern         extern            def-spons+          1  COMPLETED      0:0
-9            example-j+ cpubase_b+ def-spons+          1  COMPLETED      0:0
-9.batch           batch            def-spons+          1  COMPLETED      0:0
-9.extern         extern            def-spons+          1  COMPLETED      0:0
+JobID           JobName  Partition    Account  AllocCPUS      State ExitCode 
+------------ ---------- ---------- ---------- ---------- ---------- -------- 
+4671314      oawe_fast+   cpu-core intro_to_+          1  COMPLETED      0:0 
+4671314.bat+      batch            intro_to_+          1  COMPLETED      0:0 
+4671314.ext+     extern            intro_to_+          1  COMPLETED      0:0 
+4671316      oawe_fast+   cpu-core intro_to_+          1  COMPLETED      0:0 
+4671316.bat+      batch            intro_to_+          1  COMPLETED      0:0 
+4671316.ext+     extern            intro_to_+          1  COMPLETED      0:0 
+4671317      oawe_fast+   cpu-core intro_to_+          1  COMPLETED      0:0 
+4671317.bat+      batch            intro_to_+          1  COMPLETED      0:0 
+4671317.ext+     extern            intro_to_+          1  COMPLETED      0:0 
+4671318      oawe_fast+   cpu-core intro_to_+          1  COMPLETED      0:0 
+4671318.bat+      batch            intro_to_+          1  COMPLETED      0:0 
+4671318.ext+     extern            intro_to_+          1  COMPLETED      0:0 
+4671319      oawe_fast+   cpu-core intro_to_+          1  COMPLETED      0:0 
+4671319.bat+      batch            intro_to_+          1  COMPLETED      0:0 
+4671319.ext+     extern            intro_to_+          1  COMPLETED      0:0 
+4671320      oawe_fast+   cpu-core intro_to_+          1  COMPLETED      0:0 
+4671320.bat+      batch            intro_to_+          1  COMPLETED      0:0 
+4671320.ext+     extern            intro_to_+          1  COMPLETED      0:0 
+4671321      oawe_fast+   cpu-core intro_to_+          1  COMPLETED      0:0 
+4671321.bat+      batch            intro_to_+          1  COMPLETED      0:0 
+4671321.ext+     extern            intro_to_+          1  COMPLETED      0:0 
+4671322      oawe_fast+   cpu-core intro_to_+          1  COMPLETED      0:0 
+4671322.bat+      batch            intro_to_+          1  COMPLETED      0:0 
+4671322.ext+     extern            intro_to_+          1  COMPLETED      0:0 
+4671323      oawe_fast+   cpu-core intro_to_+          1  COMPLETED      0:0 
+4671323.bat+      batch            intro_to_+          1  COMPLETED      0:0 
+4671323.ext+     extern            intro_to_+          1  COMPLETED      0:0 
+4671324      oawe_fast+   cpu-core intro_to_+          1  COMPLETED      0:0 
+4671324.bat+      batch            intro_to_+          1  COMPLETED      0:0 
+4671324.ext+     extern            intro_to_+          1  COMPLETED      0:0 
+4671325      oawe_fast+   cpu-core intro_to_+          1  COMPLETED      0:0 
+4671325.bat+      batch            intro_to_+          1  COMPLETED      0:0 
+4671325.ext+     extern            intro_to_+          1  COMPLETED      0:0 
+4671326      oawe_fast+   cpu-core intro_to_+          1  COMPLETED      0:0 
+4671326.bat+      batch            intro_to_+          1  COMPLETED      0:0 
+4671326.ext+     extern            intro_to_+          1  COMPLETED      0:0 
+4671327      oawe_fast+   cpu-core intro_to_+          1  COMPLETED      0:0 
+4671327.bat+      batch            intro_to_+          1  COMPLETED      0:0 
+4671327.ext+     extern            intro_to_+          1  COMPLETED      0:0 
+4671328      oawe_fast+   cpu-core intro_to_+          1  COMPLETED      0:0 
+4671328.bat+      batch            intro_to_+          1  COMPLETED      0:0 
+4671328.ext+     extern            intro_to_+          1  COMPLETED      0:0 
+4671329      oawe_fast+   cpu-core intro_to_+          1  COMPLETED      0:0 
+4671329.bat+      batch            intro_to_+          1  COMPLETED      0:0 
+4671329.ext+     extern            intro_to_+          1  COMPLETED      0:0 
+4671330      oawe_fast+   cpu-core intro_to_+          1  COMPLETED      0:0 
+4671330.bat+      batch            intro_to_+          1  COMPLETED      0:0 
+4671330.ext+     extern            intro_to_+          1  COMPLETED      0:0 
+4671331      oawe_cell+   cpu-core intro_to_+          1  COMPLETED      0:0 
+4671331.bat+      batch            intro_to_+          1  COMPLETED      0:0 
+4671331.ext+     extern            intro_to_+          1  COMPLETED      0:0
 ```
 {: .output}
 
 This shows all the jobs we ran today (note that there are multiple entries per job).
 To get info about a specific job (for example, 347087), we change command slightly.
+The entries ending in .bat+ and .ext+ in sacct output represent different job steps within a single Slurm job allocation. The plus sign (+) often indicates that the field name is truncated because the default display width is too narrow, but the full step names are batch and extern. 
+bat+ (batch): This step accounts for the resources consumed by the main batch script itself. For many jobs, especially those that run a single, primary executable without using srun within the script, most of the resource usage (CPU time, memory, etc.) will be associated with this step.
+ext+ (extern): This step accounts for any resource usage that occurs outside of Slurm's direct control but within the job's allocated cgroup/resource context on the compute node.
+You can view the full names by adjusting the output format with the `--format` option, for example, sacct `--format=JobID%30,JobName%30` to widen the JobID and JobName fields.
 
 ```
 sacct -u $USER -l -j 347087
@@ -968,7 +1014,7 @@ keys to scroll through fields).
 
 ## Improving Resource Requests
 
-From the job history, we see that `amdahl` jobs finished executing in at most a few minutes, once dispatched. The time estimate we provided in the job script was far too long! This makes it harder for the queuing system to accurately estimate when resources will become free for other jobs. Practically, this means that the queuing system waits to dispatch our `amdahl` job until the full requested time slot opens, instead of "sneaking it in" a much shorter window where the job could actually finish. Specifying the expected runtime in the submission script more accurately will help alleviate cluster congestion and may get your job dispatched earlier.
+From the job history, we see that jobs finished executing in at most a few minutes, once dispatched. The time estimate we provided in the job script was far too long! This makes it harder for the queuing system to accurately estimate when resources will become free for other jobs. Practically, this means that the queuing system waits to dispatch our job until the full requested time slot opens, instead of "sneaking it in" a much shorter window where the job could actually finish. Specifying the expected runtime in the submission script more accurately will help alleviate cluster congestion and may get your job dispatched earlier.
 
 > ## Narrow the Time Estimate
 >
