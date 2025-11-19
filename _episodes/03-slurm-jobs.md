@@ -55,6 +55,50 @@ One of the major differences between using remote HPC resources and your own sys
 
 The widespread usage of scheduling systems where users submit jobs on HPC resources is a natural outcome of the shared nature of these resources. There are other things you, as an upstanding member of the community, need to consider.
 
+## Nodes
+
+Individual computers that compose a cluster are typically called _nodes_
+(although you will also hear people call them _servers_, _computers_ and
+_machines_). On a cluster, there are different types of nodes for different
+types of tasks. The node where you are right now is called the _login node_,
+_head node_, _landing pad_, or _submit node_. A login node serves as an access
+point to the cluster.
+
+As a gateway, the login node should not be used for time-consuming or
+resource-intensive tasks. You should be alert to this, and check with your
+site's operators or documentation for details of what is and isn't allowed. It
+is well suited for uploading and downloading files, setting up software, and
+running tests. Generally speaking, in these lessons, we will avoid running jobs
+on the login node.
+
+Who else is logged in to the login node?
+
+```
+$ who
+```
+{: .language-bash}
+
+```
+lclar5   pts/2        2025-11-19 05:27 (10.90.98.58)
+de-msemwa pts/6        2025-11-19 05:57 (10.89.46.211)
+de-msemwa pts/63       2025-11-19 05:57 (10.89.46.211)
+jmcdo3   pts/76       2025-10-29 14:30 (10.40.84.168)
+de-ajosh3 pts/115      2025-11-19 07:00 (10.90.98.57)
+root     pts/121      2025-11-06 14:48 (172:S.0)
+dmache   pts/133      2025-10-20 15:29 (10.40.85.26)
+jfra11   pts/152      2025-11-14 16:19 (10.40.84.108)
+wli5     pts/140      2025-11-19 07:53 (10.90.98.62)
+oawe     pts/169      2025-11-19 09:46 (172.28.128.7)
+oawe     pts/172      2025-11-19 08:57 (172.28.128.7)
+kchen7   pts/170      2025-11-19 08:51 (10.90.98.58)
+jvale8   pts/153      2025-11-13 08:57 (10.45.87.229)
+fduffy   pts/173      2025-11-19 09:13 (10.70.87.71)
+lwei     pts/203      2025-11-17 14:01 (10.91.86.112)
+```
+{: .output}
+
+Ideally, this should not show only your user ID, since there are likely several other people (including fellow learners in the class) connected right now.
+
 ## Be Kind to the Login Nodes
 
 The login node is often busy managing all of the logged in users, creating and editing files and compiling software. If the machine runs out of memory or processing capacity, it will become very slow and unusable for everyone. While the machine is meant to be used, be sure to do so responsibly -- in ways that will not adversely impact other users' experience.
