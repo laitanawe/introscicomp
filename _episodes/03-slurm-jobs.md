@@ -321,7 +321,15 @@ Generally, all SLURM directives can be embedded into a Slurm script. However, it
 - Any directive specified on the command line will supersede those embedded in the script.
 Here is what we recommend:
 
+```
+sbatch --partition=<partition_name> --account=<account_name> --mail-user=<email> <batch_script.sh>
+```
+{: .language-bash}
 
+```
+sbatch --partition=cpu-core --account=intro_to_sci_comp --mail-user=yourusername@seattlechildrens.org example-job.sh
+```
+{: .language-bash}
 
 ### Resource Requests
 
