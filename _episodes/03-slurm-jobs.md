@@ -725,6 +725,47 @@ will be their own.
 > {: .solution}
 {: .challenge}
 
+## Tasks
+In the following example, we have TWO tasks, and then ask the computer to do 1 thing as a series of events.
+```
+#!/usr/bin/env bash
+#SBATCH --job-name="my_tasks_job1"
+#SBATCH --ntasks=1
+#SBATCH --time=0-01:00:00
+#SBATCH --mem=1gb
+#SBATCH --output="slurm-tasks1-%j.o"
+#SBATCH --error="slurm-tasks1-%j.e"
+#SBATCH --mail-user=youremail@seattlechildrens.org
+#SBATCH --mail-type=BEGIN,END,FAIL,REQUEUE,ALL
+#SBATCH --partition=cpu-core
+#SBATCH --account=intro_to_sci_comp
+
+srun --ntasks=1 sleep 10 & 
+srun --ntasks=1 sleep 12 &
+wait
+```
+{: .language-bash}
+
+In the following example, we have TWO tasks, and then ask the computer to do TWO things.
+```
+#!/usr/bin/env bash
+#SBATCH --job-name="my_tasks_job2"
+#SBATCH --ntasks=2
+#SBATCH --time=0-01:00:00
+#SBATCH --mem=1gb
+#SBATCH --output="slurm-tasks2-%j.o"
+#SBATCH --error="slurm-tasks2-%j.e"
+#SBATCH --mail-user=youremail@seattlechildrens.org
+#SBATCH --mail-type=BEGIN,END,FAIL,REQUEUE,ALL
+#SBATCH --partition=cpu-core
+#SBATCH --account=intro_to_sci_comp
+
+srun --ntasks=1 sleep 10 & 
+srun --ntasks=1 sleep 12 &
+wait
+```
+{: .language-bash}
+
 ## Cancelling a Job
 
 Sometimes we'll make a mistake and need to cancel a job. This can be done with the `scancel` command. Let's submit a job and then cancel it using its job number (remember to change the walltime so that it runs long enough for you to cancel it before it is killed!).
@@ -878,7 +919,7 @@ srun - Obtain a job allocation (as needed) and execute an application.
 We've learned how to load and unload software packages. This is very useful. However, we have not yet addressed the issue of software versioning. At some point or other, you will run into issues where only one particular version of some software will be suitable. Perhaps a key bugfix only happened in a certain version, or version X broke compatibility with a file format you use.
 In either of these example cases, it helps to be very specific about what software is loaded.
 
-Let's examine the usage of `module load` more closely. Save this script as fastqc.slurm
+Let's examine the usage of `module load` more closely. Save the following script as `fastqc.slurm`.
 
 ```
 #!/usr/bin/env bash
@@ -919,7 +960,7 @@ Submitted batch job 4671439
 ```
 {: .output}
 
-Save this as cellranger.slurm
+Save the following script as `cellranger1.slurm`
 ```
 #!/usr/bin/env bash
 #SBATCH --job-name="myjob_cellranger_job1"
