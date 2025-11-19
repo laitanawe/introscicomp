@@ -973,7 +973,7 @@ cd /data/hps/assoc/private/intro_to_sci_comp/user/$USER/Desktop
 
 echo "start"
 
-mkdir fqcreports
+mkdir -pv fqcreports
 
 echo the file being processed is $file
 apptainer exec --bind /data/hps/assoc /data/hps/assoc/public/bioinformatics/container/cliSeqTools/BioinformaticsCliTools.sif fastqc -o fqcreports $file
@@ -981,6 +981,11 @@ echo fastqc completed for $file
 #sleep 130
 
 echo "end"
+```
+{: .language-bash}
+
+```
+sbatch fastqc.slurm files/SRR2023_1.fastq
 ```
 {: .language-bash}
 
