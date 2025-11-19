@@ -4,6 +4,9 @@ teaching: 45
 exercises: 45
 questions:
 - "What is a scheduler and why does a cluster need one?"
+- How does my local computer compare to the remote systems?
+- How does the login node compare to the compute nodes?
+- Are all compute nodes alike?
 - "How do I launch a program to run on a compute node in the cluster?"
 - "How do I capture the output of a program that is run on a node in the cluster?"
 - How can I be a responsible user of the HPC cluster?
@@ -26,6 +29,11 @@ objectives:
 - "Inspect the output and error files of your jobs."
 - "Find the right place to put large datasets on the cluster."
 keypoints:
+- An HPC system is a set of networked machines.
+- HPC systems typically provide login nodes and a set of compute nodes.
+- The resources found on independent (worker) nodes can vary in volume and type (amount of RAM, processor architecture, availability of network mounted filesystems, etc.).
+- Files saved on shared storage are available on all nodes.
+- The login node is a shared machine: be considerate of other users.
 - "The queuing system facilitates executing tasks"
 - "The scheduler handles how compute resources are shared between users."
 - "A job is just a shell script."
